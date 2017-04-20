@@ -1,0 +1,4391 @@
+<div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a
+
+        href="https://github.com/staltz/xstream#readme"
+
+    >xstream (v10.5.0)</a>
+</h1>
+<h4>An extremely intuitive, small, and fast functional reactive stream library for JavaScript</h4>
+<div class="apidocSectionDiv"><a
+    href="#apidoc.tableOfContents"
+    id="apidoc.tableOfContents"
+><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.xstream">module xstream</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.MemoryStream">
+            function <span class="apidocSignatureSpan">xstream.</span>MemoryStream
+            <span class="apidocSignatureSpan">(producer)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream">
+            function <span class="apidocSignatureSpan">xstream.</span>Stream
+            <span class="apidocSignatureSpan">(producer)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.default">
+            function <span class="apidocSignatureSpan">xstream.</span>default
+            <span class="apidocSignatureSpan">(producer)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">xstream.</span>MemoryStream.prototype</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">xstream.</span>NO</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">xstream.</span>NO_IL</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">xstream.</span>Stream.prototype</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">xstream.</span>concat</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">xstream.</span>debounce</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">xstream.</span>delay</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">xstream.</span>dropRepeats</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">xstream.</span>dropUntil</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">xstream.</span>flattenConcurrently</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">xstream.</span>flattenSequentially</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">xstream.</span>fromDiagram</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">xstream.</span>fromEvent</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">xstream.</span>pairwise</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">xstream.</span>sampleCombine</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">xstream.</span>split</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">xstream.</span>throttle</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">xstream.</span>tween</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.xstream.MemoryStream">module xstream.MemoryStream</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.MemoryStream.MemoryStream">
+            function <span class="apidocSignatureSpan">xstream.</span>MemoryStream
+            <span class="apidocSignatureSpan">(producer)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.MemoryStream.combine">
+            function <span class="apidocSignatureSpan">xstream.MemoryStream.</span>combine
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.MemoryStream.create">
+            function <span class="apidocSignatureSpan">xstream.MemoryStream.</span>create
+            <span class="apidocSignatureSpan">(producer)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.MemoryStream.createWithMemory">
+            function <span class="apidocSignatureSpan">xstream.MemoryStream.</span>createWithMemory
+            <span class="apidocSignatureSpan">(producer)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.MemoryStream.empty">
+            function <span class="apidocSignatureSpan">xstream.MemoryStream.</span>empty
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.MemoryStream.from">
+            function <span class="apidocSignatureSpan">xstream.MemoryStream.</span>from
+            <span class="apidocSignatureSpan">(input)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.MemoryStream.fromArray">
+            function <span class="apidocSignatureSpan">xstream.MemoryStream.</span>fromArray
+            <span class="apidocSignatureSpan">(array)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.MemoryStream.fromObservable">
+            function <span class="apidocSignatureSpan">xstream.MemoryStream.</span>fromObservable
+            <span class="apidocSignatureSpan">(obs)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.MemoryStream.fromPromise">
+            function <span class="apidocSignatureSpan">xstream.MemoryStream.</span>fromPromise
+            <span class="apidocSignatureSpan">(promise)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.MemoryStream.merge">
+            function <span class="apidocSignatureSpan">xstream.MemoryStream.</span>merge
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.MemoryStream.never">
+            function <span class="apidocSignatureSpan">xstream.MemoryStream.</span>never
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.MemoryStream.of">
+            function <span class="apidocSignatureSpan">xstream.MemoryStream.</span>of
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.MemoryStream.periodic">
+            function <span class="apidocSignatureSpan">xstream.MemoryStream.</span>periodic
+            <span class="apidocSignatureSpan">(period)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.MemoryStream.throw">
+            function <span class="apidocSignatureSpan">xstream.MemoryStream.</span>throw
+            <span class="apidocSignatureSpan">(error)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.xstream.MemoryStream.prototype">module xstream.MemoryStream.prototype</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.MemoryStream.prototype._add">
+            function <span class="apidocSignatureSpan">xstream.MemoryStream.prototype.</span>_add
+            <span class="apidocSignatureSpan">(il)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.MemoryStream.prototype._n">
+            function <span class="apidocSignatureSpan">xstream.MemoryStream.prototype.</span>_n
+            <span class="apidocSignatureSpan">(x)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.MemoryStream.prototype._stopNow">
+            function <span class="apidocSignatureSpan">xstream.MemoryStream.prototype.</span>_stopNow
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.MemoryStream.prototype._x">
+            function <span class="apidocSignatureSpan">xstream.MemoryStream.prototype.</span>_x
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.MemoryStream.prototype.constructor">
+            function <span class="apidocSignatureSpan">xstream.MemoryStream.prototype.</span>constructor
+            <span class="apidocSignatureSpan">(producer)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.MemoryStream.prototype.debug">
+            function <span class="apidocSignatureSpan">xstream.MemoryStream.prototype.</span>debug
+            <span class="apidocSignatureSpan">(labelOrSpy)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.MemoryStream.prototype.endWhen">
+            function <span class="apidocSignatureSpan">xstream.MemoryStream.prototype.</span>endWhen
+            <span class="apidocSignatureSpan">(other)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.MemoryStream.prototype.map">
+            function <span class="apidocSignatureSpan">xstream.MemoryStream.prototype.</span>map
+            <span class="apidocSignatureSpan">(project)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.MemoryStream.prototype.mapTo">
+            function <span class="apidocSignatureSpan">xstream.MemoryStream.prototype.</span>mapTo
+            <span class="apidocSignatureSpan">(projectedValue)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.MemoryStream.prototype.remember">
+            function <span class="apidocSignatureSpan">xstream.MemoryStream.prototype.</span>remember
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.MemoryStream.prototype.replaceError">
+            function <span class="apidocSignatureSpan">xstream.MemoryStream.prototype.</span>replaceError
+            <span class="apidocSignatureSpan">(replace)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.MemoryStream.prototype.take">
+            function <span class="apidocSignatureSpan">xstream.MemoryStream.prototype.</span>take
+            <span class="apidocSignatureSpan">(amount)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.xstream.NO_IL">module xstream.NO_IL</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.NO_IL._c">
+            function <span class="apidocSignatureSpan">xstream.NO_IL.</span>_c
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.NO_IL._e">
+            function <span class="apidocSignatureSpan">xstream.NO_IL.</span>_e
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.NO_IL._n">
+            function <span class="apidocSignatureSpan">xstream.NO_IL.</span>_n
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.xstream.Stream">module xstream.Stream</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.Stream">
+            function <span class="apidocSignatureSpan">xstream.</span>Stream
+            <span class="apidocSignatureSpan">(producer)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.combine">
+            function <span class="apidocSignatureSpan">xstream.Stream.</span>combine
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.create">
+            function <span class="apidocSignatureSpan">xstream.Stream.</span>create
+            <span class="apidocSignatureSpan">(producer)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.createWithMemory">
+            function <span class="apidocSignatureSpan">xstream.Stream.</span>createWithMemory
+            <span class="apidocSignatureSpan">(producer)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.empty">
+            function <span class="apidocSignatureSpan">xstream.Stream.</span>empty
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.from">
+            function <span class="apidocSignatureSpan">xstream.Stream.</span>from
+            <span class="apidocSignatureSpan">(input)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.fromArray">
+            function <span class="apidocSignatureSpan">xstream.Stream.</span>fromArray
+            <span class="apidocSignatureSpan">(array)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.fromObservable">
+            function <span class="apidocSignatureSpan">xstream.Stream.</span>fromObservable
+            <span class="apidocSignatureSpan">(obs)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.fromPromise">
+            function <span class="apidocSignatureSpan">xstream.Stream.</span>fromPromise
+            <span class="apidocSignatureSpan">(promise)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.merge">
+            function <span class="apidocSignatureSpan">xstream.Stream.</span>merge
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.never">
+            function <span class="apidocSignatureSpan">xstream.Stream.</span>never
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.of">
+            function <span class="apidocSignatureSpan">xstream.Stream.</span>of
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.periodic">
+            function <span class="apidocSignatureSpan">xstream.Stream.</span>periodic
+            <span class="apidocSignatureSpan">(period)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.throw">
+            function <span class="apidocSignatureSpan">xstream.Stream.</span>throw
+            <span class="apidocSignatureSpan">(error)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.xstream.Stream.prototype">module xstream.Stream.prototype</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.prototype._add">
+            function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>_add
+            <span class="apidocSignatureSpan">(il)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.prototype._c">
+            function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>_c
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.prototype._e">
+            function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>_e
+            <span class="apidocSignatureSpan">(err)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.prototype._hasNoSinks">
+            function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>_hasNoSinks
+            <span class="apidocSignatureSpan">(x, trace)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.prototype._map">
+            function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>_map
+            <span class="apidocSignatureSpan">(project)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.prototype._n">
+            function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>_n
+            <span class="apidocSignatureSpan">(t)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.prototype._pruneCycles">
+            function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>_pruneCycles
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.prototype._remove">
+            function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>_remove
+            <span class="apidocSignatureSpan">(il)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.prototype._stopNow">
+            function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>_stopNow
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.prototype._x">
+            function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>_x
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.prototype.addListener">
+            function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>addListener
+            <span class="apidocSignatureSpan">(listener)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.prototype.compose">
+            function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>compose
+            <span class="apidocSignatureSpan">(operator)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.prototype.ctor">
+            function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>ctor
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.prototype.debug">
+            function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>debug
+            <span class="apidocSignatureSpan">(labelOrSpy)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.prototype.drop">
+            function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>drop
+            <span class="apidocSignatureSpan">(amount)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.prototype.endWhen">
+            function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>endWhen
+            <span class="apidocSignatureSpan">(other)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.prototype.filter">
+            function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>filter
+            <span class="apidocSignatureSpan">(passes)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.prototype.flatten">
+            function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>flatten
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.prototype.fold">
+            function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>fold
+            <span class="apidocSignatureSpan">(accumulate, seed)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.prototype.imitate">
+            function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>imitate
+            <span class="apidocSignatureSpan">(target)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.prototype.last">
+            function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>last
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.prototype.map">
+            function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>map
+            <span class="apidocSignatureSpan">(project)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.prototype.mapTo">
+            function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>mapTo
+            <span class="apidocSignatureSpan">(projectedValue)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.prototype.remember">
+            function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>remember
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.prototype.removeListener">
+            function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>removeListener
+            <span class="apidocSignatureSpan">(listener)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.prototype.replaceError">
+            function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>replaceError
+            <span class="apidocSignatureSpan">(replace)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.prototype.setDebugListener">
+            function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>setDebugListener
+            <span class="apidocSignatureSpan">(listener)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.prototype.shamefullySendComplete">
+            function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>shamefullySendComplete
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.prototype.shamefullySendError">
+            function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>shamefullySendError
+            <span class="apidocSignatureSpan">(error)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.prototype.shamefullySendNext">
+            function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>shamefullySendNext
+            <span class="apidocSignatureSpan">(value)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.prototype.startWith">
+            function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>startWith
+            <span class="apidocSignatureSpan">(initial)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.prototype.subscribe">
+            function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>subscribe
+            <span class="apidocSignatureSpan">(listener)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.Stream.prototype.take">
+            function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>take
+            <span class="apidocSignatureSpan">(amount)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.xstream.concat">module xstream.concat</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.concat.default">
+            function <span class="apidocSignatureSpan">xstream.concat.</span>default
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.xstream.debounce">module xstream.debounce</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.debounce.default">
+            function <span class="apidocSignatureSpan">xstream.debounce.</span>default
+            <span class="apidocSignatureSpan">(period)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.xstream.delay">module xstream.delay</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.delay.default">
+            function <span class="apidocSignatureSpan">xstream.delay.</span>default
+            <span class="apidocSignatureSpan">(period)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.xstream.dropRepeats">module xstream.dropRepeats</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.dropRepeats.DropRepeatsOperator">
+            function <span class="apidocSignatureSpan">xstream.dropRepeats.</span>DropRepeatsOperator
+            <span class="apidocSignatureSpan">(ins, fn)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.dropRepeats.default">
+            function <span class="apidocSignatureSpan">xstream.dropRepeats.</span>default
+            <span class="apidocSignatureSpan">(isEqual)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.xstream.dropUntil">module xstream.dropUntil</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.dropUntil.DropUntilOperator">
+            function <span class="apidocSignatureSpan">xstream.dropUntil.</span>DropUntilOperator
+            <span class="apidocSignatureSpan">(o, // o = other ins)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.dropUntil.default">
+            function <span class="apidocSignatureSpan">xstream.dropUntil.</span>default
+            <span class="apidocSignatureSpan">(other)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.xstream.flattenConcurrently">module xstream.flattenConcurrently</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.flattenConcurrently.FlattenConcOperator">
+            function <span class="apidocSignatureSpan">xstream.flattenConcurrently.</span>FlattenConcOperator
+            <span class="apidocSignatureSpan">(ins)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.flattenConcurrently.default">
+            function <span class="apidocSignatureSpan">xstream.flattenConcurrently.</span>default
+            <span class="apidocSignatureSpan">(ins)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.xstream.flattenSequentially">module xstream.flattenSequentially</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.flattenSequentially.FlattenSeqOperator">
+            function <span class="apidocSignatureSpan">xstream.flattenSequentially.</span>FlattenSeqOperator
+            <span class="apidocSignatureSpan">(ins)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.flattenSequentially.default">
+            function <span class="apidocSignatureSpan">xstream.flattenSequentially.</span>default
+            <span class="apidocSignatureSpan">(ins)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.xstream.fromDiagram">module xstream.fromDiagram</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.fromDiagram.DiagramProducer">
+            function <span class="apidocSignatureSpan">xstream.fromDiagram.</span>DiagramProducer
+            <span class="apidocSignatureSpan">(diagram, opt)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.fromDiagram.default">
+            function <span class="apidocSignatureSpan">xstream.fromDiagram.</span>default
+            <span class="apidocSignatureSpan">(diagram, options)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.xstream.fromEvent">module xstream.fromEvent</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.fromEvent.DOMEventProducer">
+            function <span class="apidocSignatureSpan">xstream.fromEvent.</span>DOMEventProducer
+            <span class="apidocSignatureSpan">(node, eventType, useCapture)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.fromEvent.NodeEventProducer">
+            function <span class="apidocSignatureSpan">xstream.fromEvent.</span>NodeEventProducer
+            <span class="apidocSignatureSpan">(node, eventName)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.fromEvent.default">
+            function <span class="apidocSignatureSpan">xstream.fromEvent.</span>default
+            <span class="apidocSignatureSpan">(element, eventName, useCapture)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.xstream.pairwise">module xstream.pairwise</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.pairwise.default">
+            function <span class="apidocSignatureSpan">xstream.pairwise.</span>default
+            <span class="apidocSignatureSpan">(ins)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.xstream.sampleCombine">module xstream.sampleCombine</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.sampleCombine.SampleCombineListener">
+            function <span class="apidocSignatureSpan">xstream.sampleCombine.</span>SampleCombineListener
+            <span class="apidocSignatureSpan">(i, p)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.sampleCombine.SampleCombineOperator">
+            function <span class="apidocSignatureSpan">xstream.sampleCombine.</span>SampleCombineOperator
+            <span class="apidocSignatureSpan">(ins, streams)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.sampleCombine.default">
+            function <span class="apidocSignatureSpan">xstream.sampleCombine.</span>default
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.xstream.split">module xstream.split</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.split.SplitOperator">
+            function <span class="apidocSignatureSpan">xstream.split.</span>SplitOperator
+            <span class="apidocSignatureSpan">(s, // s = separator ins)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.split.default">
+            function <span class="apidocSignatureSpan">xstream.split.</span>default
+            <span class="apidocSignatureSpan">(separator)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.xstream.throttle">module xstream.throttle</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.throttle.default">
+            function <span class="apidocSignatureSpan">xstream.throttle.</span>default
+            <span class="apidocSignatureSpan">(period)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.xstream.tween">module xstream.tween</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xstream.tween.default">
+            function <span class="apidocSignatureSpan">xstream.tween.</span>default
+            <span class="apidocSignatureSpan">(_a)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.xstream" id="apidoc.module.xstream">module xstream</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.MemoryStream" id="apidoc.element.xstream.MemoryStream">
+        function <span class="apidocSignatureSpan">xstream.</span>MemoryStream
+        <span class="apidocSignatureSpan">(producer)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function MemoryStream(producer) {
+    var _this = _super.call(this, producer) || this;
+    _this._has = false;
+    return _this;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream" id="apidoc.element.xstream.Stream">
+        function <span class="apidocSignatureSpan">xstream.</span>Stream
+        <span class="apidocSignatureSpan">(producer)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function Stream(producer) {
+    this._prod = producer || NO;
+    this._ils = [];
+    this._stopID = NO;
+    this._dl = NO;
+    this._d = false;
+    this._target = NO;
+    this._err = NO;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+ * @return {Stream}
+ */
+function concat() {
+    var streams = [];
+    for (var _i = 0; _i &#x3c; arguments.length; _i++) {
+        streams[_i] = arguments[_i];
+    }
+    return new index_1.<span class="apidocCodeKeywordSpan">Stream</span>(new ConcatProducer(streams));
+}
+Object.defineProperty(exports, &#x22;__esModule&#x22;, { value: true });
+exports.default = concat;
+//# sourceMappingURL=concat.js.map
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.default" id="apidoc.element.xstream.default">
+        function <span class="apidocSignatureSpan">xstream.</span>default
+        <span class="apidocSignatureSpan">(producer)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function Stream(producer) {
+    this._prod = producer || NO;
+    this._ils = [];
+    this._stopID = NO;
+    this._dl = NO;
+    this._d = false;
+    this._target = NO;
+    this._err = NO;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+ */
+function tween(_a) {
+    var from = _a.from, to = _a.to, duration = _a.duration, _b = _a.ease, ease = _b === void 0 ? tweenFactory.linear.ease : _b,
+_c = _a.interval, interval = _c === void 0 ? DEFAULT_INTERVAL : _c;
+    var totalTicks = Math.round(duration / interval);
+    return index_1.Stream.periodic(interval)
+        .take(totalTicks)
+        .map(function (tick) { return ease(tick / totalTicks, from, to); })
+        .compose(function (s) { return concat_1.<span class="apidocCodeKeywordSpan">default</span>(s, index_1.Stream.of(to)); });
+}
+var tweenFactory = tween;
+tweenFactory.linear = { ease: interpolate };
+tweenFactory.power2 = easingPower2;
+tweenFactory.power3 = easingPower3;
+tweenFactory.power4 = easingPower4;
+tweenFactory.exponential = easingExponential;
+...</pre></li>
+    </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.xstream.MemoryStream" id="apidoc.module.xstream.MemoryStream">module xstream.MemoryStream</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.MemoryStream.MemoryStream" id="apidoc.element.xstream.MemoryStream.MemoryStream">
+        function <span class="apidocSignatureSpan">xstream.</span>MemoryStream
+        <span class="apidocSignatureSpan">(producer)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function MemoryStream(producer) {
+    var _this = _super.call(this, producer) || this;
+    _this._has = false;
+    return _this;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.MemoryStream.combine" id="apidoc.element.xstream.MemoryStream.combine">
+        function <span class="apidocSignatureSpan">xstream.MemoryStream.</span>combine
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function combine() {
+    var streams = [];
+    for (var _i = 0; _i &#x3c; arguments.length; _i++) {
+        streams[_i] = arguments[_i];
+    }
+    return new Stream(new Combine(streams));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+```js
+import pairwise from &#x27;xstream/extra/pairwise&#x27;
+
+const stream1 = xs.of(1);
+const stream2 = xs.of(2);
+
+xs.<span class="apidocCodeKeywordSpan">combine</span>(stream1, stream2).map(
+  combinedEmissions =&#x3e; ([ ...combinedEmissions ])
+).compose(pairwise)
+```
+
+#### Arguments:
+
+- `stream1: Stream` A stream to combine together with other streams.
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.MemoryStream.create" id="apidoc.element.xstream.MemoryStream.create">
+        function <span class="apidocSignatureSpan">xstream.MemoryStream.</span>create
+        <span class="apidocSignatureSpan">(producer)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">create = function (producer) {
+    if (producer) {
+        if (typeof producer.start !== &#x27;function&#x27;
+            || typeof producer.stop !== &#x27;function&#x27;)
+            throw new Error(&#x27;producer requires both start and stop functions&#x27;);
+        internalizeProducer(producer); // mutates the input
+    }
+    return new Stream(producer);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+## Producer
+
+A Producer is like a machine that produces events to be broadcast on a Stream.
+
+Events from a Stream must come from somewhere, right? That&#x27;s why we need Producers. They are objects with two functions attached
+: `start(listener)` and `stop()`. Once you call `start` with a `listener`, the Producer will start generating events and it will
+ send those to the listener. When you call `stop()`, the Producer should quit doing its own thing.
+
+Streams are also Listeners (actually they are &#x22;InternalListeners&#x22;, not Listeners, but that&#x27;s a detail you can ignore
+), so you can theoretically give a Stream as the listener in `producer.start(streamAsListener)`. Then, essentially the Producer
+is now generating events that will be broadcast on the Stream. Nice, huh? Now a bunch of listeners can be attached to the Stream
+ and they can all get those events originally coming from the Producer. That&#x27;s why `xs.<span class="apidocCodeKeywordSpan">
+create</span>(producer)` receives a Producer to be the heart of a new Stream. Check this out:
+
+```js
+var producer = {
+start: function (listener) {
+  this.id = setInterval(() =&#x3e; listener.next(&#x27;yo&#x27;), 1000)
+},
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.MemoryStream.createWithMemory" id="apidoc.element.xstream.MemoryStream.createWithMemory">
+        function <span class="apidocSignatureSpan">xstream.MemoryStream.</span>createWithMemory
+        <span class="apidocSignatureSpan">(producer)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">createWithMemory = function (producer) {
+    if (producer)
+        internalizeProducer(producer); // mutates the input
+    return new MemoryStream(producer);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.MemoryStream.empty" id="apidoc.element.xstream.MemoryStream.empty">
+        function <span class="apidocSignatureSpan">xstream.MemoryStream.</span>empty
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">empty = function () {
+    return new Stream({
+        _start: function (il) { il._c(); },
+        _stop: noop,
+    });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  &#x27;xstream/extra/(.*)&#x27;: function (_, extra) {
+    return require(&#x27;./extra/&#x27; + extra).default;
+  }
+},
+
+globals: {
+  xs: xstream,
+  stream: xstream.<span class="apidocCodeKeywordSpan">empty</span>(),
+  A: xstream.never(),
+  B: xstream.never(),
+  setInterval: noop,
+  console: {
+    log: noop,
+    error: noop
+  },
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.MemoryStream.from" id="apidoc.element.xstream.MemoryStream.from">
+        function <span class="apidocSignatureSpan">xstream.MemoryStream.</span>from
+        <span class="apidocSignatureSpan">(input)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">from = function (input) {
+    if (typeof input[symbol_observable_1.default] === &#x27;function&#x27;)
+        return Stream.fromObservable(input);
+    else if (typeof input.then === &#x27;function&#x27;)
+        return Stream.fromPromise(input);
+    else if (Array.isArray(input))
+        return Stream.fromArray(input);
+    throw new TypeError(&#x22;Type of input to from() must be an Array, Promise, or Observable&#x22;);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  return arr[0] + arr[1] + arr[2];
+}
+
+var xs1 = xs.fromArray(a);
+var xs2 = xs.fromArray(a);
+var xs3 = xs.fromArray(a);
+
+var m1 = most.<span class="apidocCodeKeywordSpan">from</span>(a);
+var m2 = most.from(a);
+var m3 = most.from(a);
+
+var rx1 = rxjs.Observable.from(a);
+var rx2 = rxjs.Observable.from(a);
+var rx3 = rxjs.Observable.from(a);
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.MemoryStream.fromArray" id="apidoc.element.xstream.MemoryStream.fromArray">
+        function <span class="apidocSignatureSpan">xstream.MemoryStream.</span>fromArray
+        <span class="apidocSignatureSpan">(array)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">fromArray = function (array) {
+    return new Stream(new FromArray(array));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+ */
+Stream.from = function (input) {
+    if (typeof input[symbol_observable_1.default] === &#x27;function&#x27;)
+        return Stream.fromObservable(input);
+    else if (typeof input.then === &#x27;function&#x27;)
+        return Stream.fromPromise(input);
+    else if (Array.isArray(input))
+        return Stream.<span class="apidocCodeKeywordSpan">fromArray</span>(input);
+    throw new TypeError(&#x22;Type of input to from() must be an Array, Promise, or Observable&#x22;);
+};
+/**
+ * Creates a Stream that immediately emits the arguments that you give to
+ * *of*, then completes.
+ *
+ * Marble diagram:
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.MemoryStream.fromObservable" id="apidoc.element.xstream.MemoryStream.fromObservable">
+        function <span class="apidocSignatureSpan">xstream.MemoryStream.</span>fromObservable
+        <span class="apidocSignatureSpan">(obs)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">fromObservable = function (obs) {
+    if (obs.endWhen)
+        return obs;
+    return new Stream(new FromObservable(obs));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+ *
+ * @factory true
+ * @param {Array|Promise|Observable} input The input to make a stream from.
+ * @return {Stream}
+ */
+Stream.from = function (input) {
+    if (typeof input[symbol_observable_1.default] === &#x27;function&#x27;)
+        return Stream.<span class="apidocCodeKeywordSpan">fromObservable</span>(input);
+    else if (typeof input.then === &#x27;function&#x27;)
+        return Stream.fromPromise(input);
+    else if (Array.isArray(input))
+        return Stream.fromArray(input);
+    throw new TypeError(&#x22;Type of input to from() must be an Array, Promise, or Observable&#x22;);
+};
+/**
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.MemoryStream.fromPromise" id="apidoc.element.xstream.MemoryStream.fromPromise">
+        function <span class="apidocSignatureSpan">xstream.MemoryStream.</span>fromPromise
+        <span class="apidocSignatureSpan">(promise)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">fromPromise = function (promise) {
+    return new Stream(new FromPromise(promise));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+ * @param {Array|Promise|Observable} input The input to make a stream from.
+ * @return {Stream}
+ */
+Stream.from = function (input) {
+    if (typeof input[symbol_observable_1.default] === &#x27;function&#x27;)
+        return Stream.fromObservable(input);
+    else if (typeof input.then === &#x27;function&#x27;)
+        return Stream.<span class="apidocCodeKeywordSpan">fromPromise</span>(input);
+    else if (Array.isArray(input))
+        return Stream.fromArray(input);
+    throw new TypeError(&#x22;Type of input to from() must be an Array, Promise, or Observable&#x22;);
+};
+/**
+ * Creates a Stream that immediately emits the arguments that you give to
+ * *of*, then completes.
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.MemoryStream.merge" id="apidoc.element.xstream.MemoryStream.merge">
+        function <span class="apidocSignatureSpan">xstream.MemoryStream.</span>merge
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function merge() {
+    var streams = [];
+    for (var _i = 0; _i &#x3c; arguments.length; _i++) {
+        streams[_i] = arguments[_i];
+    }
+    return new Stream(new Merge(streams));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+};
+
+suite
+.add(&#x27;xstream&#x27;, function (deferred) {
+  var source = xs.fromArray(a);
+  var inc = source.filter(isPositive).mapTo(+1);
+  var dec = source.filter(isNegative).mapTo(-1);
+  var count = xs.<span class="apidocCodeKeywordSpan">merge</span>(inc, dec).fold(addXY, 0);
+  var label = xs.of(&#x27;initial&#x27;, &#x27;Count is &#x27;);
+  var view = xs.combine(label, count).map(renderWithArray);
+  runners.runXStream(deferred, view);
+}, options)
+.add(&#x27;most&#x27;, function (deferred) {
+  var source = most.from(a);
+  var inc = source.filter(isPositive).map(returnPlus1);
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.MemoryStream.never" id="apidoc.element.xstream.MemoryStream.never">
+        function <span class="apidocSignatureSpan">xstream.MemoryStream.</span>never
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">never = function () {
+    return new Stream({ _start: noop, _stop: noop });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+    return require(&#x27;./extra/&#x27; + extra).default;
+  }
+},
+
+globals: {
+  xs: xstream,
+  stream: xstream.empty(),
+  A: xstream.<span class="apidocCodeKeywordSpan">never</span>(),
+  B: xstream.never(),
+  setInterval: noop,
+  console: {
+    log: noop,
+    error: noop
+  },
+  document: new FakeEventTarget(),
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.MemoryStream.of" id="apidoc.element.xstream.MemoryStream.of">
+        function <span class="apidocSignatureSpan">xstream.MemoryStream.</span>of
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">of = function () {
+    var items = [];
+    for (var _i = 0; _i &#x3c; arguments.length; _i++) {
+        items[_i] = arguments[_i];
+    }
+    return Stream.fromArray(items);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+Note: to minimize garbage collection, *combine* uses the same array
+instance for each emission.  If you need to compare emissions over time,
+cache the values with `map` first:
+
+```js
+import pairwise from &#x27;xstream/extra/pairwise&#x27;
+
+const stream1 = xs.<span class="apidocCodeKeywordSpan">of</span>(1);
+const stream2 = xs.of(2);
+
+xs.combine(stream1, stream2).map(
+  combinedEmissions =&#x3e; ([ ...combinedEmissions ])
+).compose(pairwise)
+```
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.MemoryStream.periodic" id="apidoc.element.xstream.MemoryStream.periodic">
+        function <span class="apidocSignatureSpan">xstream.MemoryStream.</span>periodic
+        <span class="apidocSignatureSpan">(period)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">periodic = function (period) {
+    return new Stream(new Periodic(period));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+```js
+import xs from &#x27;xstream&#x27;
+
+// Tick every second incremental numbers,
+// only pass even numbers, then map them to their square,
+// and stop after 5 seconds has passed
+
+var stream = xs.<span class="apidocCodeKeywordSpan">periodic</span>(1000)
+  .filter(i =&#x3e; i % 2 === 0)
+  .map(i =&#x3e; i * i)
+  .endWhen(xs.periodic(5000).take(1))
+
+// So far, the stream is idle.
+// As soon as it gets its first listener, it starts executing.
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.MemoryStream.throw" id="apidoc.element.xstream.MemoryStream.throw">
+        function <span class="apidocSignatureSpan">xstream.MemoryStream.</span>throw
+        <span class="apidocSignatureSpan">(error)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">throw = function (error) {
+    return new Stream({
+        _start: function (il) { il._e(error); },
+        _stop: noop,
+    });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.xstream.MemoryStream.prototype" id="apidoc.module.xstream.MemoryStream.prototype">module xstream.MemoryStream.prototype</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.MemoryStream.prototype._add" id="apidoc.element.xstream.MemoryStream.prototype._add">
+        function <span class="apidocSignatureSpan">xstream.MemoryStream.prototype.</span>_add
+        <span class="apidocSignatureSpan">(il)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">_add = function (il) {
+    var ta = this._target;
+    if (ta !== NO)
+        return ta._add(il);
+    var a = this._ils;
+    a.push(il);
+    if (a.length &#x3e; 1) {
+        if (this._has)
+            il._n(this._v);
+        return;
+    }
+    if (this._stopID !== NO) {
+        if (this._has)
+            il._n(this._v);
+        clearTimeout(this._stopID);
+        this._stopID = NO;
+    }
+    else if (this._has)
+        il._n(this._v);
+    else {
+        var p = this._prod;
+        if (p !== NO)
+            p._start(this);
+    }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+}
+Merge.prototype._start = function (out) {
+    this.out = out;
+    var s = this.insArr;
+    var L = s.length;
+    this.ac = L;
+    for (var i = 0; i &#x3c; L; i++)
+        s[i].<span class="apidocCodeKeywordSpan">_add</span>(this);
+};
+Merge.prototype._stop = function () {
+    var s = this.insArr;
+    var L = s.length;
+    for (var i = 0; i &#x3c; L; i++)
+        s[i]._remove(this);
+    this.out = NO;
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.MemoryStream.prototype._n" id="apidoc.element.xstream.MemoryStream.prototype._n">
+        function <span class="apidocSignatureSpan">xstream.MemoryStream.prototype.</span>_n
+        <span class="apidocSignatureSpan">(x)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">_n = function (x) {
+    this._v = x;
+    this._has = true;
+    _super.prototype._n.call(this, x);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+return StreamSub;
+}());
+var Observer = (function () {
+function Observer(_listener) {
+    this._listener = _listener;
+}
+Observer.prototype.next = function (value) {
+    this._listener.<span class="apidocCodeKeywordSpan">_n</span>(value);
+};
+Observer.prototype.error = function (err) {
+    this._listener._e(err);
+};
+Observer.prototype.complete = function () {
+    this._listener._c();
+};
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.MemoryStream.prototype._stopNow" id="apidoc.element.xstream.MemoryStream.prototype._stopNow">
+        function <span class="apidocSignatureSpan">xstream.MemoryStream.prototype.</span>_stopNow
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">_stopNow = function () {
+    this._has = false;
+    _super.prototype._stopNow.call(this);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+        return ta._remove(il);
+    var a = this._ils;
+    var i = a.indexOf(il);
+    if (i &#x3e; -1) {
+        a.splice(i, 1);
+        if (this._prod !== NO &#x26;&#x26; a.length &#x3c;= 0) {
+            this._err = NO;
+            this._stopID = setTimeout(function () { return _this.<span class="apidocCodeKeywordSpan">_stopNow</span>(); });
+        }
+        else if (a.length === 1) {
+            this._pruneCycles();
+        }
+    }
+};
+// If all paths stemming from `this` stream eventually end at `this`
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.MemoryStream.prototype._x" id="apidoc.element.xstream.MemoryStream.prototype._x">
+        function <span class="apidocSignatureSpan">xstream.MemoryStream.prototype.</span>_x
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">_x = function () {
+    this._has = false;
+    _super.prototype._x.call(this);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+};
+Stream.prototype._e = function (err) {
+    if (this._err !== NO)
+        return;
+    this._err = err;
+    var a = this._ils;
+    var L = a.length;
+    this.<span class="apidocCodeKeywordSpan">_x</span>();
+    if (this._d)
+        this._dl._e(err);
+    if (L == 1)
+        a[0]._e(err);
+    else if (L == 0)
+        return;
+    else {
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.MemoryStream.prototype.constructor" id="apidoc.element.xstream.MemoryStream.prototype.constructor">
+        function <span class="apidocSignatureSpan">xstream.MemoryStream.prototype.</span>constructor
+        <span class="apidocSignatureSpan">(producer)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function MemoryStream(producer) {
+    var _this = _super.call(this, producer) || this;
+    _this._has = false;
+    return _this;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.MemoryStream.prototype.debug" id="apidoc.element.xstream.MemoryStream.prototype.debug">
+        function <span class="apidocSignatureSpan">xstream.MemoryStream.prototype.</span>debug
+        <span class="apidocSignatureSpan">(labelOrSpy)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">debug = function (labelOrSpy) {
+    return _super.prototype.debug.call(this, labelOrSpy);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.MemoryStream.prototype.endWhen" id="apidoc.element.xstream.MemoryStream.prototype.endWhen">
+        function <span class="apidocSignatureSpan">xstream.MemoryStream.prototype.</span>endWhen
+        <span class="apidocSignatureSpan">(other)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">endWhen = function (other) {
+    return _super.prototype.endWhen.call(this, other);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+// Tick every second incremental numbers,
+// only pass even numbers, then map them to their square,
+// and stop after 5 seconds has passed
+
+var stream = xs.periodic(1000)
+.filter(i =&#x3e; i % 2 === 0)
+.map(i =&#x3e; i * i)
+.<span class="apidocCodeKeywordSpan">endWhen</span>(xs.periodic(5000).take(1))
+
+// So far, the stream is idle.
+// As soon as it gets its first listener, it starts executing.
+
+stream.addListener({
+next: i =&#x3e; console.log(i),
+error: err =&#x3e; console.error(err),
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.MemoryStream.prototype.map" id="apidoc.element.xstream.MemoryStream.prototype.map">
+        function <span class="apidocSignatureSpan">xstream.MemoryStream.prototype.</span>map
+        <span class="apidocSignatureSpan">(project)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">map = function (project) {
+    return this._map(project);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+// Tick every second incremental numbers,
+// only pass even numbers, then map them to their square,
+// and stop after 5 seconds has passed
+
+var stream = xs.periodic(1000)
+.filter(i =&#x3e; i % 2 === 0)
+.<span class="apidocCodeKeywordSpan">map</span>(i =&#x3e; i * i)
+.endWhen(xs.periodic(5000).take(1))
+
+// So far, the stream is idle.
+// As soon as it gets its first listener, it starts executing.
+
+stream.addListener({
+next: i =&#x3e; console.log(i),
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.MemoryStream.prototype.mapTo" id="apidoc.element.xstream.MemoryStream.prototype.mapTo">
+        function <span class="apidocSignatureSpan">xstream.MemoryStream.prototype.</span>mapTo
+        <span class="apidocSignatureSpan">(projectedValue)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">mapTo = function (projectedValue) {
+    return _super.prototype.mapTo.call(this, projectedValue);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+*
+* Examples:
+*
+* ```js
+* import fromEvent from &#x27;xstream/extra/fromEvent&#x27;
+*
+* const stream = fromEvent(document.querySelector(&#x27;.button&#x27;), &#x27;click&#x27;)
+*   .<span class="apidocCodeKeywordSpan">mapTo</span>(&#x27;Button clicked!&#x27;)
+*
+* stream.addListener({
+*   next: i =&#x3e; console.log(i),
+*   error: err =&#x3e; console.error(err),
+*   complete: () =&#x3e; console.log(&#x27;completed&#x27;)
+* })
+* ```
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.MemoryStream.prototype.remember" id="apidoc.element.xstream.MemoryStream.prototype.remember">
+        function <span class="apidocSignatureSpan">xstream.MemoryStream.prototype.</span>remember
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">remember = function () {
+    return this;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.MemoryStream.prototype.replaceError" id="apidoc.element.xstream.MemoryStream.prototype.replaceError">
+        function <span class="apidocSignatureSpan">xstream.MemoryStream.prototype.</span>replaceError
+        <span class="apidocSignatureSpan">(replace)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">replaceError = function (replace) {
+    return _super.prototype.replaceError.call(this, replace);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.MemoryStream.prototype.take" id="apidoc.element.xstream.MemoryStream.prototype.take">
+        function <span class="apidocSignatureSpan">xstream.MemoryStream.prototype.</span>take
+        <span class="apidocSignatureSpan">(amount)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">take = function (amount) {
+    return _super.prototype.take.call(this, amount);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+// Tick every second incremental numbers,
+// only pass even numbers, then map them to their square,
+// and stop after 5 seconds has passed
+
+var stream = xs.periodic(1000)
+.filter(i =&#x3e; i % 2 === 0)
+.map(i =&#x3e; i * i)
+.endWhen(xs.periodic(5000).<span class="apidocCodeKeywordSpan">take</span>(1))
+
+// So far, the stream is idle.
+// As soon as it gets its first listener, it starts executing.
+
+stream.addListener({
+next: i =&#x3e; console.log(i),
+error: err =&#x3e; console.error(err),
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.xstream.NO_IL" id="apidoc.module.xstream.NO_IL">module xstream.NO_IL</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.NO_IL._c" id="apidoc.element.xstream.NO_IL._c">
+        function <span class="apidocSignatureSpan">xstream.NO_IL.</span>_c
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function noop() { }</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+Observer.prototype.next = function (value) {
+    this._listener._n(value);
+};
+Observer.prototype.error = function (err) {
+    this._listener._e(err);
+};
+Observer.prototype.complete = function () {
+    this._listener.<span class="apidocCodeKeywordSpan">_c</span>();
+};
+return Observer;
+}());
+var FromObservable = (function () {
+function FromObservable(observable) {
+    this.type = &#x27;fromObservable&#x27;;
+    this.ins = observable;
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.NO_IL._e" id="apidoc.element.xstream.NO_IL._e">
+        function <span class="apidocSignatureSpan">xstream.NO_IL.</span>_e
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function noop() { }</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+};
+}
+function _try(c, t, u) {
+try {
+    return c.f(t);
+}
+catch (e) {
+    u.<span class="apidocCodeKeywordSpan">_e</span>(e);
+    return NO;
+}
+}
+var NO_IL = {
+_n: noop,
+_e: noop,
+_c: noop,
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.NO_IL._n" id="apidoc.element.xstream.NO_IL._n">
+        function <span class="apidocSignatureSpan">xstream.NO_IL.</span>_n
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function noop() { }</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+return StreamSub;
+}());
+var Observer = (function () {
+function Observer(_listener) {
+    this._listener = _listener;
+}
+Observer.prototype.next = function (value) {
+    this._listener.<span class="apidocCodeKeywordSpan">_n</span>(value);
+};
+Observer.prototype.error = function (err) {
+    this._listener._e(err);
+};
+Observer.prototype.complete = function () {
+    this._listener._c();
+};
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.xstream.Stream" id="apidoc.module.xstream.Stream">module xstream.Stream</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.Stream" id="apidoc.element.xstream.Stream.Stream">
+        function <span class="apidocSignatureSpan">xstream.</span>Stream
+        <span class="apidocSignatureSpan">(producer)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function Stream(producer) {
+    this._prod = producer || NO;
+    this._ils = [];
+    this._stopID = NO;
+    this._dl = NO;
+    this._d = false;
+    this._target = NO;
+    this._err = NO;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+ * @return {Stream}
+ */
+function concat() {
+    var streams = [];
+    for (var _i = 0; _i &#x3c; arguments.length; _i++) {
+        streams[_i] = arguments[_i];
+    }
+    return new index_1.<span class="apidocCodeKeywordSpan">Stream</span>(new ConcatProducer(streams));
+}
+Object.defineProperty(exports, &#x22;__esModule&#x22;, { value: true });
+exports.default = concat;
+//# sourceMappingURL=concat.js.map
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.combine" id="apidoc.element.xstream.Stream.combine">
+        function <span class="apidocSignatureSpan">xstream.Stream.</span>combine
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function combine() {
+    var streams = [];
+    for (var _i = 0; _i &#x3c; arguments.length; _i++) {
+        streams[_i] = arguments[_i];
+    }
+    return new Stream(new Combine(streams));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+```js
+import pairwise from &#x27;xstream/extra/pairwise&#x27;
+
+const stream1 = xs.of(1);
+const stream2 = xs.of(2);
+
+xs.<span class="apidocCodeKeywordSpan">combine</span>(stream1, stream2).map(
+  combinedEmissions =&#x3e; ([ ...combinedEmissions ])
+).compose(pairwise)
+```
+
+#### Arguments:
+
+- `stream1: Stream` A stream to combine together with other streams.
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.create" id="apidoc.element.xstream.Stream.create">
+        function <span class="apidocSignatureSpan">xstream.Stream.</span>create
+        <span class="apidocSignatureSpan">(producer)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">create = function (producer) {
+    if (producer) {
+        if (typeof producer.start !== &#x27;function&#x27;
+            || typeof producer.stop !== &#x27;function&#x27;)
+            throw new Error(&#x27;producer requires both start and stop functions&#x27;);
+        internalizeProducer(producer); // mutates the input
+    }
+    return new Stream(producer);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+## Producer
+
+A Producer is like a machine that produces events to be broadcast on a Stream.
+
+Events from a Stream must come from somewhere, right? That&#x27;s why we need Producers. They are objects with two functions attached
+: `start(listener)` and `stop()`. Once you call `start` with a `listener`, the Producer will start generating events and it will
+ send those to the listener. When you call `stop()`, the Producer should quit doing its own thing.
+
+Streams are also Listeners (actually they are &#x22;InternalListeners&#x22;, not Listeners, but that&#x27;s a detail you can ignore
+), so you can theoretically give a Stream as the listener in `producer.start(streamAsListener)`. Then, essentially the Producer
+is now generating events that will be broadcast on the Stream. Nice, huh? Now a bunch of listeners can be attached to the Stream
+ and they can all get those events originally coming from the Producer. That&#x27;s why `xs.<span class="apidocCodeKeywordSpan">
+create</span>(producer)` receives a Producer to be the heart of a new Stream. Check this out:
+
+```js
+var producer = {
+start: function (listener) {
+  this.id = setInterval(() =&#x3e; listener.next(&#x27;yo&#x27;), 1000)
+},
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.createWithMemory" id="apidoc.element.xstream.Stream.createWithMemory">
+        function <span class="apidocSignatureSpan">xstream.Stream.</span>createWithMemory
+        <span class="apidocSignatureSpan">(producer)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">createWithMemory = function (producer) {
+    if (producer)
+        internalizeProducer(producer); // mutates the input
+    return new MemoryStream(producer);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.empty" id="apidoc.element.xstream.Stream.empty">
+        function <span class="apidocSignatureSpan">xstream.Stream.</span>empty
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">empty = function () {
+    return new Stream({
+        _start: function (il) { il._c(); },
+        _stop: noop,
+    });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  &#x27;xstream/extra/(.*)&#x27;: function (_, extra) {
+    return require(&#x27;./extra/&#x27; + extra).default;
+  }
+},
+
+globals: {
+  xs: xstream,
+  stream: xstream.<span class="apidocCodeKeywordSpan">empty</span>(),
+  A: xstream.never(),
+  B: xstream.never(),
+  setInterval: noop,
+  console: {
+    log: noop,
+    error: noop
+  },
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.from" id="apidoc.element.xstream.Stream.from">
+        function <span class="apidocSignatureSpan">xstream.Stream.</span>from
+        <span class="apidocSignatureSpan">(input)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">from = function (input) {
+    if (typeof input[symbol_observable_1.default] === &#x27;function&#x27;)
+        return Stream.fromObservable(input);
+    else if (typeof input.then === &#x27;function&#x27;)
+        return Stream.fromPromise(input);
+    else if (Array.isArray(input))
+        return Stream.fromArray(input);
+    throw new TypeError(&#x22;Type of input to from() must be an Array, Promise, or Observable&#x22;);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  return arr[0] + arr[1] + arr[2];
+}
+
+var xs1 = xs.fromArray(a);
+var xs2 = xs.fromArray(a);
+var xs3 = xs.fromArray(a);
+
+var m1 = most.<span class="apidocCodeKeywordSpan">from</span>(a);
+var m2 = most.from(a);
+var m3 = most.from(a);
+
+var rx1 = rxjs.Observable.from(a);
+var rx2 = rxjs.Observable.from(a);
+var rx3 = rxjs.Observable.from(a);
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.fromArray" id="apidoc.element.xstream.Stream.fromArray">
+        function <span class="apidocSignatureSpan">xstream.Stream.</span>fromArray
+        <span class="apidocSignatureSpan">(array)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">fromArray = function (array) {
+    return new Stream(new FromArray(array));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+ */
+Stream.from = function (input) {
+    if (typeof input[symbol_observable_1.default] === &#x27;function&#x27;)
+        return Stream.fromObservable(input);
+    else if (typeof input.then === &#x27;function&#x27;)
+        return Stream.fromPromise(input);
+    else if (Array.isArray(input))
+        return Stream.<span class="apidocCodeKeywordSpan">fromArray</span>(input);
+    throw new TypeError(&#x22;Type of input to from() must be an Array, Promise, or Observable&#x22;);
+};
+/**
+ * Creates a Stream that immediately emits the arguments that you give to
+ * *of*, then completes.
+ *
+ * Marble diagram:
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.fromObservable" id="apidoc.element.xstream.Stream.fromObservable">
+        function <span class="apidocSignatureSpan">xstream.Stream.</span>fromObservable
+        <span class="apidocSignatureSpan">(obs)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">fromObservable = function (obs) {
+    if (obs.endWhen)
+        return obs;
+    return new Stream(new FromObservable(obs));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+ *
+ * @factory true
+ * @param {Array|Promise|Observable} input The input to make a stream from.
+ * @return {Stream}
+ */
+Stream.from = function (input) {
+    if (typeof input[symbol_observable_1.default] === &#x27;function&#x27;)
+        return Stream.<span class="apidocCodeKeywordSpan">fromObservable</span>(input);
+    else if (typeof input.then === &#x27;function&#x27;)
+        return Stream.fromPromise(input);
+    else if (Array.isArray(input))
+        return Stream.fromArray(input);
+    throw new TypeError(&#x22;Type of input to from() must be an Array, Promise, or Observable&#x22;);
+};
+/**
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.fromPromise" id="apidoc.element.xstream.Stream.fromPromise">
+        function <span class="apidocSignatureSpan">xstream.Stream.</span>fromPromise
+        <span class="apidocSignatureSpan">(promise)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">fromPromise = function (promise) {
+    return new Stream(new FromPromise(promise));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+ * @param {Array|Promise|Observable} input The input to make a stream from.
+ * @return {Stream}
+ */
+Stream.from = function (input) {
+    if (typeof input[symbol_observable_1.default] === &#x27;function&#x27;)
+        return Stream.fromObservable(input);
+    else if (typeof input.then === &#x27;function&#x27;)
+        return Stream.<span class="apidocCodeKeywordSpan">fromPromise</span>(input);
+    else if (Array.isArray(input))
+        return Stream.fromArray(input);
+    throw new TypeError(&#x22;Type of input to from() must be an Array, Promise, or Observable&#x22;);
+};
+/**
+ * Creates a Stream that immediately emits the arguments that you give to
+ * *of*, then completes.
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.merge" id="apidoc.element.xstream.Stream.merge">
+        function <span class="apidocSignatureSpan">xstream.Stream.</span>merge
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function merge() {
+    var streams = [];
+    for (var _i = 0; _i &#x3c; arguments.length; _i++) {
+        streams[_i] = arguments[_i];
+    }
+    return new Stream(new Merge(streams));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+};
+
+suite
+.add(&#x27;xstream&#x27;, function (deferred) {
+  var source = xs.fromArray(a);
+  var inc = source.filter(isPositive).mapTo(+1);
+  var dec = source.filter(isNegative).mapTo(-1);
+  var count = xs.<span class="apidocCodeKeywordSpan">merge</span>(inc, dec).fold(addXY, 0);
+  var label = xs.of(&#x27;initial&#x27;, &#x27;Count is &#x27;);
+  var view = xs.combine(label, count).map(renderWithArray);
+  runners.runXStream(deferred, view);
+}, options)
+.add(&#x27;most&#x27;, function (deferred) {
+  var source = most.from(a);
+  var inc = source.filter(isPositive).map(returnPlus1);
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.never" id="apidoc.element.xstream.Stream.never">
+        function <span class="apidocSignatureSpan">xstream.Stream.</span>never
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">never = function () {
+    return new Stream({ _start: noop, _stop: noop });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+    return require(&#x27;./extra/&#x27; + extra).default;
+  }
+},
+
+globals: {
+  xs: xstream,
+  stream: xstream.empty(),
+  A: xstream.<span class="apidocCodeKeywordSpan">never</span>(),
+  B: xstream.never(),
+  setInterval: noop,
+  console: {
+    log: noop,
+    error: noop
+  },
+  document: new FakeEventTarget(),
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.of" id="apidoc.element.xstream.Stream.of">
+        function <span class="apidocSignatureSpan">xstream.Stream.</span>of
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">of = function () {
+    var items = [];
+    for (var _i = 0; _i &#x3c; arguments.length; _i++) {
+        items[_i] = arguments[_i];
+    }
+    return Stream.fromArray(items);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+Note: to minimize garbage collection, *combine* uses the same array
+instance for each emission.  If you need to compare emissions over time,
+cache the values with `map` first:
+
+```js
+import pairwise from &#x27;xstream/extra/pairwise&#x27;
+
+const stream1 = xs.<span class="apidocCodeKeywordSpan">of</span>(1);
+const stream2 = xs.of(2);
+
+xs.combine(stream1, stream2).map(
+  combinedEmissions =&#x3e; ([ ...combinedEmissions ])
+).compose(pairwise)
+```
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.periodic" id="apidoc.element.xstream.Stream.periodic">
+        function <span class="apidocSignatureSpan">xstream.Stream.</span>periodic
+        <span class="apidocSignatureSpan">(period)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">periodic = function (period) {
+    return new Stream(new Periodic(period));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+```js
+import xs from &#x27;xstream&#x27;
+
+// Tick every second incremental numbers,
+// only pass even numbers, then map them to their square,
+// and stop after 5 seconds has passed
+
+var stream = xs.<span class="apidocCodeKeywordSpan">periodic</span>(1000)
+  .filter(i =&#x3e; i % 2 === 0)
+  .map(i =&#x3e; i * i)
+  .endWhen(xs.periodic(5000).take(1))
+
+// So far, the stream is idle.
+// As soon as it gets its first listener, it starts executing.
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.throw" id="apidoc.element.xstream.Stream.throw">
+        function <span class="apidocSignatureSpan">xstream.Stream.</span>throw
+        <span class="apidocSignatureSpan">(error)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">throw = function (error) {
+    return new Stream({
+        _start: function (il) { il._e(error); },
+        _stop: noop,
+    });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.xstream.Stream.prototype" id="apidoc.module.xstream.Stream.prototype">module xstream.Stream.prototype</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.prototype._add" id="apidoc.element.xstream.Stream.prototype._add">
+        function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>_add
+        <span class="apidocSignatureSpan">(il)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">_add = function (il) {
+    var ta = this._target;
+    if (ta !== NO)
+        return ta._add(il);
+    var a = this._ils;
+    a.push(il);
+    if (a.length &#x3e; 1)
+        return;
+    if (this._stopID !== NO) {
+        clearTimeout(this._stopID);
+        this._stopID = NO;
+    }
+    else {
+        var p = this._prod;
+        if (p !== NO)
+            p._start(this);
+    }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+}
+Merge.prototype._start = function (out) {
+    this.out = out;
+    var s = this.insArr;
+    var L = s.length;
+    this.ac = L;
+    for (var i = 0; i &#x3c; L; i++)
+        s[i].<span class="apidocCodeKeywordSpan">_add</span>(this);
+};
+Merge.prototype._stop = function () {
+    var s = this.insArr;
+    var L = s.length;
+    for (var i = 0; i &#x3c; L; i++)
+        s[i]._remove(this);
+    this.out = NO;
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.prototype._c" id="apidoc.element.xstream.Stream.prototype._c">
+        function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>_c
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">_c = function () {
+    var a = this._ils;
+    var L = a.length;
+    this._x();
+    if (this._d)
+        this._dl._c();
+    if (L == 1)
+        a[0]._c();
+    else if (L == 0)
+        return;
+    else {
+        var b = cp(a);
+        for (var i = 0; i &#x3c; L; i++)
+            b[i]._c();
+    }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+Observer.prototype.next = function (value) {
+    this._listener._n(value);
+};
+Observer.prototype.error = function (err) {
+    this._listener._e(err);
+};
+Observer.prototype.complete = function () {
+    this._listener.<span class="apidocCodeKeywordSpan">_c</span>();
+};
+return Observer;
+}());
+var FromObservable = (function () {
+function FromObservable(observable) {
+    this.type = &#x27;fromObservable&#x27;;
+    this.ins = observable;
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.prototype._e" id="apidoc.element.xstream.Stream.prototype._e">
+        function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>_e
+        <span class="apidocSignatureSpan">(err)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">_e = function (err) {
+    if (this._err !== NO)
+        return;
+    this._err = err;
+    var a = this._ils;
+    var L = a.length;
+    this._x();
+    if (this._d)
+        this._dl._e(err);
+    if (L == 1)
+        a[0]._e(err);
+    else if (L == 0)
+        return;
+    else {
+        var b = cp(a);
+        for (var i = 0; i &#x3c; L; i++)
+            b[i]._e(err);
+    }
+    if (!this._d &#x26;&#x26; L == 0)
+        throw this._err;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+};
+}
+function _try(c, t, u) {
+try {
+    return c.f(t);
+}
+catch (e) {
+    u.<span class="apidocCodeKeywordSpan">_e</span>(e);
+    return NO;
+}
+}
+var NO_IL = {
+_n: noop,
+_e: noop,
+_c: noop,
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.prototype._hasNoSinks" id="apidoc.element.xstream.Stream.prototype._hasNoSinks">
+        function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>_hasNoSinks
+        <span class="apidocSignatureSpan">(x, trace)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">_hasNoSinks = function (x, trace) {
+    if (trace.indexOf(x) !== -1)
+        return true;
+    else if (x.out === this)
+        return true;
+    else if (x.out &#x26;&#x26; x.out !== NO)
+        return this._hasNoSinks(x.out, trace.concat(x));
+    else if (x._ils) {
+        for (var i = 0, N = x._ils.length; i &#x3c; N; i++)
+            if (!this._hasNoSinks(x._ils[i], trace.concat(x)))
+                return false;
+        return true;
+    }
+    else
+        return false;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+    }
+};
+// If all paths stemming from `this` stream eventually end at `this`
+// stream, then we remove the single listener of `this` stream, to
+// force it to end its execution and dispose resources. This method
+// assumes as a precondition that this._ils has just one listener.
+Stream.prototype._pruneCycles = function () {
+    if (this.<span class="apidocCodeKeywordSpan">_hasNoSinks</span>(this, []))
+        this._remove(this._ils[0]);
+};
+// Checks whether *there is no* path starting from `x` that leads to an end
+// listener (sink) in the stream graph, following edges A-&#x3e;B where B is a
+// listener of A. This means these paths constitute a cycle somehow. Is given
+// a trace of all visited nodes so far.
+Stream.prototype._hasNoSinks = function (x, trace) {
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.prototype._map" id="apidoc.element.xstream.Stream.prototype._map">
+        function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>_map
+        <span class="apidocSignatureSpan">(project)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">_map = function (project) {
+    return new (this.ctor())(new MapOp(project, this));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+ *
+ * @param {Function} project A function of type `(t: T) =&#x3e; U` that takes event
+ * `t` of type `T` from the input Stream and produces an event of type `U`, to
+ * be emitted on the output Stream.
+ * @return {Stream}
+ */
+Stream.prototype.map = function (project) {
+    return this.<span class="apidocCodeKeywordSpan">_map</span>(project);
+};
+/**
+ * It&#x27;s like `map`, but transforms each input event to always the same
+ * constant value on the output Stream.
+ *
+ * Marble diagram:
+ *
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.prototype._n" id="apidoc.element.xstream.Stream.prototype._n">
+        function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>_n
+        <span class="apidocSignatureSpan">(t)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">_n = function (t) {
+    var a = this._ils;
+    var L = a.length;
+    if (this._d)
+        this._dl._n(t);
+    if (L == 1)
+        a[0]._n(t);
+    else if (L == 0)
+        return;
+    else {
+        var b = cp(a);
+        for (var i = 0; i &#x3c; L; i++)
+            b[i]._n(t);
+    }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+return StreamSub;
+}());
+var Observer = (function () {
+function Observer(_listener) {
+    this._listener = _listener;
+}
+Observer.prototype.next = function (value) {
+    this._listener.<span class="apidocCodeKeywordSpan">_n</span>(value);
+};
+Observer.prototype.error = function (err) {
+    this._listener._e(err);
+};
+Observer.prototype.complete = function () {
+    this._listener._c();
+};
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.prototype._pruneCycles" id="apidoc.element.xstream.Stream.prototype._pruneCycles">
+        function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>_pruneCycles
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">_pruneCycles = function () {
+    if (this._hasNoSinks(this, []))
+        this._remove(this._ils[0]);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+    if (i &#x3e; -1) {
+        a.splice(i, 1);
+        if (this._prod !== NO &#x26;&#x26; a.length &#x3c;= 0) {
+            this._err = NO;
+            this._stopID = setTimeout(function () { return _this._stopNow(); });
+        }
+        else if (a.length === 1) {
+            this.<span class="apidocCodeKeywordSpan">_pruneCycles</span>();
+        }
+    }
+};
+// If all paths stemming from `this` stream eventually end at `this`
+// stream, then we remove the single listener of `this` stream, to
+// force it to end its execution and dispose resources. This method
+// assumes as a precondition that this._ils has just one listener.
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.prototype._remove" id="apidoc.element.xstream.Stream.prototype._remove">
+        function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>_remove
+        <span class="apidocSignatureSpan">(il)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">_remove = function (il) {
+    var _this = this;
+    var ta = this._target;
+    if (ta !== NO)
+        return ta._remove(il);
+    var a = this._ils;
+    var i = a.indexOf(il);
+    if (i &#x3e; -1) {
+        a.splice(i, 1);
+        if (this._prod !== NO &#x26;&#x26; a.length &#x3c;= 0) {
+            this._err = NO;
+            this._stopID = setTimeout(function () { return _this._stopNow(); });
+        }
+        else if (a.length === 1) {
+            this._pruneCycles();
+        }
+    }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+    for (var i = 0; i &#x3c; L; i++)
+        s[i]._add(this);
+};
+Merge.prototype._stop = function () {
+    var s = this.insArr;
+    var L = s.length;
+    for (var i = 0; i &#x3c; L; i++)
+        s[i].<span class="apidocCodeKeywordSpan">_remove</span>(this);
+    this.out = NO;
+};
+Merge.prototype._n = function (t) {
+    var u = this.out;
+    if (u === NO)
+        return;
+    u._n(t);
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.prototype._stopNow" id="apidoc.element.xstream.Stream.prototype._stopNow">
+        function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>_stopNow
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">_stopNow = function () {
+    // WARNING: code that calls this method should
+    // first check if this._prod is valid (not `NO`)
+    this._prod._stop();
+    this._err = NO;
+    this._stopID = NO;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+        return ta._remove(il);
+    var a = this._ils;
+    var i = a.indexOf(il);
+    if (i &#x3e; -1) {
+        a.splice(i, 1);
+        if (this._prod !== NO &#x26;&#x26; a.length &#x3c;= 0) {
+            this._err = NO;
+            this._stopID = setTimeout(function () { return _this.<span class="apidocCodeKeywordSpan">_stopNow</span>(); });
+        }
+        else if (a.length === 1) {
+            this._pruneCycles();
+        }
+    }
+};
+// If all paths stemming from `this` stream eventually end at `this`
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.prototype._x" id="apidoc.element.xstream.Stream.prototype._x">
+        function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>_x
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">_x = function () {
+    if (this._ils.length === 0)
+        return;
+    if (this._prod !== NO)
+        this._prod._stop();
+    this._err = NO;
+    this._ils = [];
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+};
+Stream.prototype._e = function (err) {
+    if (this._err !== NO)
+        return;
+    this._err = err;
+    var a = this._ils;
+    var L = a.length;
+    this.<span class="apidocCodeKeywordSpan">_x</span>();
+    if (this._d)
+        this._dl._e(err);
+    if (L == 1)
+        a[0]._e(err);
+    else if (L == 0)
+        return;
+    else {
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.prototype.addListener" id="apidoc.element.xstream.Stream.prototype.addListener">
+        function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>addListener
+        <span class="apidocSignatureSpan">(listener)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">addListener = function (listener) {
+    listener._n = listener.next || noop;
+    listener._e = listener.error || noop;
+    listener._c = listener.complete || noop;
+    this._add(listener);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  .filter(i =&#x3e; i % 2 === 0)
+  .map(i =&#x3e; i * i)
+  .endWhen(xs.periodic(5000).take(1))
+
+// So far, the stream is idle.
+// As soon as it gets its first listener, it starts executing.
+
+stream.<span class="apidocCodeKeywordSpan">addListener</span>({
+  next: i =&#x3e; console.log(i),
+  error: err =&#x3e; console.error(err),
+  complete: () =&#x3e; console.log(&#x27;completed&#x27;),
+})
+```
+
+# Installation
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.prototype.compose" id="apidoc.element.xstream.Stream.prototype.compose">
+        function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>compose
+        <span class="apidocSignatureSpan">(operator)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">compose = function (operator) {
+    return operator(this);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+import pairwise from &#x27;xstream/extra/pairwise&#x27;
+
+const stream1 = xs.of(1);
+const stream2 = xs.of(2);
+
+xs.combine(stream1, stream2).map(
+  combinedEmissions =&#x3e; ([ ...combinedEmissions ])
+).<span class="apidocCodeKeywordSpan">compose</span>(pairwise)
+```
+
+#### Arguments:
+
+- `stream1: Stream` A stream to combine together with other streams.
+- `stream2: Stream` A stream to combine together with other streams. Multiple streams, not just two, may be given as arguments.
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.prototype.ctor" id="apidoc.element.xstream.Stream.prototype.ctor">
+        function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>ctor
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">ctor = function () {
+    return this instanceof MemoryStream ? MemoryStream : Stream;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+ * emission.
+ * @return {Stream}
+ */
+Stream.periodic = function (period) {
+    return new Stream(new Periodic(period));
+};
+Stream.prototype._map = function (project) {
+    return new (this.<span class="apidocCodeKeywordSpan">ctor</span>())(new MapOp(project, this));
+};
+/**
+ * Transforms each event from the input Stream through a `project` function,
+ * to get a Stream that emits those transformed events.
+ *
+ * Marble diagram:
+ *
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.prototype.debug" id="apidoc.element.xstream.Stream.prototype.debug">
+        function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>debug
+        <span class="apidocSignatureSpan">(labelOrSpy)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">debug = function (labelOrSpy) {
+    return new (this.ctor())(new Debug(this, labelOrSpy));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.prototype.drop" id="apidoc.element.xstream.Stream.prototype.drop">
+        function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>drop
+        <span class="apidocSignatureSpan">(amount)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">drop = function (amount) {
+    return new Stream(new Drop(amount, this));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.prototype.endWhen" id="apidoc.element.xstream.Stream.prototype.endWhen">
+        function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>endWhen
+        <span class="apidocSignatureSpan">(other)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">endWhen = function (other) {
+    return new (this.ctor())(new EndWhen(other, this));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+// Tick every second incremental numbers,
+// only pass even numbers, then map them to their square,
+// and stop after 5 seconds has passed
+
+var stream = xs.periodic(1000)
+.filter(i =&#x3e; i % 2 === 0)
+.map(i =&#x3e; i * i)
+.<span class="apidocCodeKeywordSpan">endWhen</span>(xs.periodic(5000).take(1))
+
+// So far, the stream is idle.
+// As soon as it gets its first listener, it starts executing.
+
+stream.addListener({
+next: i =&#x3e; console.log(i),
+error: err =&#x3e; console.error(err),
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.prototype.filter" id="apidoc.element.xstream.Stream.prototype.filter">
+        function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>filter
+        <span class="apidocSignatureSpan">(passes)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">filter = function (passes) {
+    var p = this._prod;
+    if (p instanceof Filter)
+        return new Stream(new Filter(and(p.f, passes), p.ins));
+    return new Stream(new Filter(passes, this));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+import xs from &#x27;xstream&#x27;
+
+// Tick every second incremental numbers,
+// only pass even numbers, then map them to their square,
+// and stop after 5 seconds has passed
+
+var stream = xs.periodic(1000)
+  .<span class="apidocCodeKeywordSpan">filter</span>(i =&#x3e; i % 2 === 0)
+  .map(i =&#x3e; i * i)
+  .endWhen(xs.periodic(5000).take(1))
+
+// So far, the stream is idle.
+// As soon as it gets its first listener, it starts executing.
+
+stream.addListener({
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.prototype.flatten" id="apidoc.element.xstream.Stream.prototype.flatten">
+        function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>flatten
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">flatten = function () {
+    var p = this._prod;
+    return new Stream(new Flatten(this));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+applications. A parent component contains some child components. A child
+has an action stream which is given to the parent to define its state:
+
+&#x3c;!-- skip-example --&#x3e;
+```js
+const childActionProxy$ = xs.create();
+const parent = Parent({...sources, childAction$: childActionProxy$});
+const childAction$ = parent.state$.map(s =&#x3e; s.child.action$).<span class="apidocCodeKeywordSpan">flatten</span>();
+childActionProxy$.imitate(childAction$);
+```
+
+Note, though, that **`imitate()` does not support MemoryStreams**. If we
+would attempt to imitate a MemoryStream in a circular dependency, we would
+either get a race condition (where the symptom would be &#x22;nothing happens&#x22;)
+or an infinite cyclic emission of values. It&#x27;s useful to think about
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.prototype.fold" id="apidoc.element.xstream.Stream.prototype.fold">
+        function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>fold
+        <span class="apidocSignatureSpan">(accumulate, seed)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">fold = function (accumulate, seed) {
+    return new MemoryStream(new Fold(accumulate, seed, this));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+};
+
+suite
+.add(&#x27;xstream&#x27;, function (deferred) {
+  var source = xs.fromArray(a);
+  var inc = source.filter(isPositive).mapTo(+1);
+  var dec = source.filter(isNegative).mapTo(-1);
+  var count = xs.merge(inc, dec).<span class="apidocCodeKeywordSpan">fold</span>(addXY, 0);
+  var label = xs.of(&#x27;initial&#x27;, &#x27;Count is &#x27;);
+  var view = xs.combine(label, count).map(renderWithArray);
+  runners.runXStream(deferred, view);
+}, options)
+.add(&#x27;most&#x27;, function (deferred) {
+  var source = most.from(a);
+  var inc = source.filter(isPositive).map(returnPlus1);
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.prototype.imitate" id="apidoc.element.xstream.Stream.prototype.imitate">
+        function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>imitate
+        <span class="apidocSignatureSpan">(target)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">imitate = function (target) {
+    if (target instanceof MemoryStream)
+        throw new Error(&#x27;A MemoryStream was given to imitate(), but it only &#x27; +
+            &#x27;supports a Stream. Read more about this restriction here: &#x27; +
+            &#x27;https://github.com/staltz/xstream#faq&#x27;);
+    this._target = target;
+    for (var ils = this._ils, N = ils.length, i = 0; i &#x3c; N; i++)
+        target._add(ils[i]);
+    this._ils = [];
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+```js
+import delay from &#x27;xstream/extra/delay&#x27;
+
+var secondProxy$ = xs.create();
+var first$ = secondProxy$.map(x =&#x3e; x * 10).take(3);
+var second$ = first$.map(x =&#x3e; x + 1).startWith(1).compose(delay(100));
+secondProxy$.<span class="apidocCodeKeywordSpan">imitate</span>(second$);
+```
+
+We create `secondProxy$` before the others, so it can be used in the
+declaration of `first$`. Then, after both `first$` and `second$` are
+defined, we hook `secondProxy$` with `second$` with `imitate()` to tell
+that they are &#x22;the same&#x22;. `imitate` will not trigger the start of any
+stream, it just binds `secondProxy$` and `second$` together.
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.prototype.last" id="apidoc.element.xstream.Stream.prototype.last">
+        function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>last
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">last = function () {
+    return new Stream(new Last(this));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  e.currentTarget.failure = e.error;
+}
+};
+
+suite
+.add(&#x27;xstream&#x27;, function(deferred) {
+  runners.runXStream(deferred,
+    xs.fromArray(a).map(add1).filter(odd).map(add1).map(add1).filter(even).fold(sum, 0).<span class="apidocCodeKeywordSpan">last
+</span>());
+}, options)
+.add(&#x27;most&#x27;, function(deferred) {
+  runners.runMost(deferred, most.from(a).map(add1).filter(odd).map(add1).map(add1).filter(even).reduce(sum, 0));
+}, options)
+.add(&#x27;rx 5&#x27;, function(deferred) {
+  runners.runRx5(deferred,
+    rxjs.Observable.from(a).map(add1).filter(odd).map(add1).map(add1).filter(even).reduce(sum, 0));
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.prototype.map" id="apidoc.element.xstream.Stream.prototype.map">
+        function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>map
+        <span class="apidocSignatureSpan">(project)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">map = function (project) {
+    return this._map(project);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+// Tick every second incremental numbers,
+// only pass even numbers, then map them to their square,
+// and stop after 5 seconds has passed
+
+var stream = xs.periodic(1000)
+.filter(i =&#x3e; i % 2 === 0)
+.<span class="apidocCodeKeywordSpan">map</span>(i =&#x3e; i * i)
+.endWhen(xs.periodic(5000).take(1))
+
+// So far, the stream is idle.
+// As soon as it gets its first listener, it starts executing.
+
+stream.addListener({
+next: i =&#x3e; console.log(i),
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.prototype.mapTo" id="apidoc.element.xstream.Stream.prototype.mapTo">
+        function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>mapTo
+        <span class="apidocSignatureSpan">(projectedValue)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">mapTo = function (projectedValue) {
+    var s = this.map(function () { return projectedValue; });
+    var op = s._prod;
+    op.type = &#x27;mapTo&#x27;;
+    return s;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+*
+* Examples:
+*
+* ```js
+* import fromEvent from &#x27;xstream/extra/fromEvent&#x27;
+*
+* const stream = fromEvent(document.querySelector(&#x27;.button&#x27;), &#x27;click&#x27;)
+*   .<span class="apidocCodeKeywordSpan">mapTo</span>(&#x27;Button clicked!&#x27;)
+*
+* stream.addListener({
+*   next: i =&#x3e; console.log(i),
+*   error: err =&#x3e; console.error(err),
+*   complete: () =&#x3e; console.log(&#x27;completed&#x27;)
+* })
+* ```
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.prototype.remember" id="apidoc.element.xstream.Stream.prototype.remember">
+        function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>remember
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">remember = function () {
+    return new MemoryStream(new Remember(this));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.prototype.removeListener" id="apidoc.element.xstream.Stream.prototype.removeListener">
+        function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>removeListener
+        <span class="apidocSignatureSpan">(listener)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">removeListener = function (listener) {
+    this._remove(listener);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+stream.addListener(listener)
+```
+
+And when you think the Listener is done, you can remove it from the Stream:
+
+&#x3c;!-- skip-example --&#x3e;
+```js
+stream.<span class="apidocCodeKeywordSpan">removeListener</span>(listener)
+```
+
+## Producer
+
+A Producer is like a machine that produces events to be broadcast on a Stream.
+
+Events from a Stream must come from somewhere, right? That&#x27;s why we need Producers. They are objects with two functions attached
+: `start(listener)` and `stop()`. Once you call `start` with a `listener`, the Producer will start generating events and it will
+ send those to the listener. When you call `stop()`, the Producer should quit doing its own thing.
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.prototype.replaceError" id="apidoc.element.xstream.Stream.prototype.replaceError">
+        function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>replaceError
+        <span class="apidocSignatureSpan">(replace)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">replaceError = function (replace) {
+    return new (this.ctor())(new ReplaceError(replace, this));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.prototype.setDebugListener" id="apidoc.element.xstream.Stream.prototype.setDebugListener">
+        function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>setDebugListener
+        <span class="apidocSignatureSpan">(listener)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">setDebugListener = function (listener) {
+    if (!listener) {
+        this._d = false;
+        this._dl = NO;
+    }
+    else {
+        this._d = true;
+        listener._n = listener.next || noop;
+        listener._e = listener.error || noop;
+        listener._c = listener.complete || noop;
+        this._dl = listener;
+    }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.prototype.shamefullySendComplete" id="apidoc.element.xstream.Stream.prototype.shamefullySendComplete">
+        function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>shamefullySendComplete
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">shamefullySendComplete = function () {
+    this._c();
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.prototype.shamefullySendError" id="apidoc.element.xstream.Stream.prototype.shamefullySendError">
+        function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>shamefullySendError
+        <span class="apidocSignatureSpan">(error)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">shamefullySendError = function (error) {
+    this._e(error);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.prototype.shamefullySendNext" id="apidoc.element.xstream.Stream.prototype.shamefullySendNext">
+        function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>shamefullySendNext
+        <span class="apidocSignatureSpan">(value)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">shamefullySendNext = function (value) {
+    this._n(value);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.prototype.startWith" id="apidoc.element.xstream.Stream.prototype.startWith">
+        function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>startWith
+        <span class="apidocSignatureSpan">(initial)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">startWith = function (initial) {
+    return new MemoryStream(new StartWith(this, initial));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+which in turn depends on `first$`:
+
+&#x3c;!-- skip-example --&#x3e;
+```js
+import delay from &#x27;xstream/extra/delay&#x27;
+
+var first$ = second$.map(x =&#x3e; x * 10).take(3);
+var second$ = first$.map(x =&#x3e; x + 1).<span class="apidocCodeKeywordSpan">startWith</span>(1).compose(delay(100));
+```
+
+However, that is invalid JavaScript, because `second$` is undefined
+on the first line. This is how *imitate* can help solve it:
+
+```js
+import delay from &#x27;xstream/extra/delay&#x27;
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.prototype.subscribe" id="apidoc.element.xstream.Stream.prototype.subscribe">
+        function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>subscribe
+        <span class="apidocSignatureSpan">(listener)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">subscribe = function (listener) {
+    this.addListener(listener);
+    return new StreamSub(this, listener);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+    this.type = &#x27;fromObservable&#x27;;
+    this.ins = observable;
+    this.active = false;
+}
+FromObservable.prototype._start = function (out) {
+    this.out = out;
+    this.active = true;
+    this._sub = this.ins.<span class="apidocCodeKeywordSpan">subscribe</span>(new Observer(out));
+    if (!this.active)
+        this._sub.unsubscribe();
+};
+FromObservable.prototype._stop = function () {
+    if (this._sub)
+        this._sub.unsubscribe();
+    this.active = false;
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.Stream.prototype.take" id="apidoc.element.xstream.Stream.prototype.take">
+        function <span class="apidocSignatureSpan">xstream.Stream.prototype.</span>take
+        <span class="apidocSignatureSpan">(amount)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">take = function (amount) {
+    return new (this.ctor())(new Take(amount, this));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+// Tick every second incremental numbers,
+// only pass even numbers, then map them to their square,
+// and stop after 5 seconds has passed
+
+var stream = xs.periodic(1000)
+.filter(i =&#x3e; i % 2 === 0)
+.map(i =&#x3e; i * i)
+.endWhen(xs.periodic(5000).<span class="apidocCodeKeywordSpan">take</span>(1))
+
+// So far, the stream is idle.
+// As soon as it gets its first listener, it starts executing.
+
+stream.addListener({
+next: i =&#x3e; console.log(i),
+error: err =&#x3e; console.error(err),
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.xstream.concat" id="apidoc.module.xstream.concat">module xstream.concat</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.concat.default" id="apidoc.element.xstream.concat.default">
+        function <span class="apidocSignatureSpan">xstream.concat.</span>default
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function concat() {
+    var streams = [];
+    for (var _i = 0; _i &#x3c; arguments.length; _i++) {
+        streams[_i] = arguments[_i];
+    }
+    return new index_1.Stream(new ConcatProducer(streams));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+ */
+function tween(_a) {
+    var from = _a.from, to = _a.to, duration = _a.duration, _b = _a.ease, ease = _b === void 0 ? tweenFactory.linear.ease : _b,
+_c = _a.interval, interval = _c === void 0 ? DEFAULT_INTERVAL : _c;
+    var totalTicks = Math.round(duration / interval);
+    return index_1.Stream.periodic(interval)
+        .take(totalTicks)
+        .map(function (tick) { return ease(tick / totalTicks, from, to); })
+        .compose(function (s) { return concat_1.<span class="apidocCodeKeywordSpan">default</span>(s, index_1.Stream.of(to)); });
+}
+var tweenFactory = tween;
+tweenFactory.linear = { ease: interpolate };
+tweenFactory.power2 = easingPower2;
+tweenFactory.power3 = easingPower3;
+tweenFactory.power4 = easingPower4;
+tweenFactory.exponential = easingExponential;
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.xstream.debounce" id="apidoc.module.xstream.debounce">module xstream.debounce</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.debounce.default" id="apidoc.element.xstream.debounce.default">
+        function <span class="apidocSignatureSpan">xstream.debounce.</span>default
+        <span class="apidocSignatureSpan">(period)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function debounce(period) {
+    return function debounceOperator(ins) {
+        return new index_1.Stream(new DebounceOperator(period, ins));
+    };
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+ */
+function tween(_a) {
+    var from = _a.from, to = _a.to, duration = _a.duration, _b = _a.ease, ease = _b === void 0 ? tweenFactory.linear.ease : _b,
+_c = _a.interval, interval = _c === void 0 ? DEFAULT_INTERVAL : _c;
+    var totalTicks = Math.round(duration / interval);
+    return index_1.Stream.periodic(interval)
+        .take(totalTicks)
+        .map(function (tick) { return ease(tick / totalTicks, from, to); })
+        .compose(function (s) { return concat_1.<span class="apidocCodeKeywordSpan">default</span>(s, index_1.Stream.of(to)); });
+}
+var tweenFactory = tween;
+tweenFactory.linear = { ease: interpolate };
+tweenFactory.power2 = easingPower2;
+tweenFactory.power3 = easingPower3;
+tweenFactory.power4 = easingPower4;
+tweenFactory.exponential = easingExponential;
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.xstream.delay" id="apidoc.module.xstream.delay">module xstream.delay</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.delay.default" id="apidoc.element.xstream.delay.default">
+        function <span class="apidocSignatureSpan">xstream.delay.</span>default
+        <span class="apidocSignatureSpan">(period)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function delay(period) {
+    return function delayOperator(ins) {
+        return new index_1.Stream(new DelayOperator(period, ins));
+    };
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+ */
+function tween(_a) {
+    var from = _a.from, to = _a.to, duration = _a.duration, _b = _a.ease, ease = _b === void 0 ? tweenFactory.linear.ease : _b,
+_c = _a.interval, interval = _c === void 0 ? DEFAULT_INTERVAL : _c;
+    var totalTicks = Math.round(duration / interval);
+    return index_1.Stream.periodic(interval)
+        .take(totalTicks)
+        .map(function (tick) { return ease(tick / totalTicks, from, to); })
+        .compose(function (s) { return concat_1.<span class="apidocCodeKeywordSpan">default</span>(s, index_1.Stream.of(to)); });
+}
+var tweenFactory = tween;
+tweenFactory.linear = { ease: interpolate };
+tweenFactory.power2 = easingPower2;
+tweenFactory.power3 = easingPower3;
+tweenFactory.power4 = easingPower4;
+tweenFactory.exponential = easingExponential;
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.xstream.dropRepeats" id="apidoc.module.xstream.dropRepeats">module xstream.dropRepeats</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.dropRepeats.DropRepeatsOperator" id="apidoc.element.xstream.dropRepeats.DropRepeatsOperator">
+        function <span class="apidocSignatureSpan">xstream.dropRepeats.</span>DropRepeatsOperator
+        <span class="apidocSignatureSpan">(ins, fn)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function DropRepeatsOperator(ins, fn) {
+    this.ins = ins;
+    this.fn = fn;
+    this.type = &#x27;dropRepeats&#x27;;
+    this.out = null;
+    this.v = empty;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.dropRepeats.default" id="apidoc.element.xstream.dropRepeats.default">
+        function <span class="apidocSignatureSpan">xstream.dropRepeats.</span>default
+        <span class="apidocSignatureSpan">(isEqual)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function dropRepeats(isEqual) {
+    if (isEqual === void 0) { isEqual = void 0; }
+    return function dropRepeatsOperator(ins) {
+        return new index_1.Stream(new DropRepeatsOperator(ins, isEqual));
+    };
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+ */
+function tween(_a) {
+    var from = _a.from, to = _a.to, duration = _a.duration, _b = _a.ease, ease = _b === void 0 ? tweenFactory.linear.ease : _b,
+_c = _a.interval, interval = _c === void 0 ? DEFAULT_INTERVAL : _c;
+    var totalTicks = Math.round(duration / interval);
+    return index_1.Stream.periodic(interval)
+        .take(totalTicks)
+        .map(function (tick) { return ease(tick / totalTicks, from, to); })
+        .compose(function (s) { return concat_1.<span class="apidocCodeKeywordSpan">default</span>(s, index_1.Stream.of(to)); });
+}
+var tweenFactory = tween;
+tweenFactory.linear = { ease: interpolate };
+tweenFactory.power2 = easingPower2;
+tweenFactory.power3 = easingPower3;
+tweenFactory.power4 = easingPower4;
+tweenFactory.exponential = easingExponential;
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.xstream.dropUntil" id="apidoc.module.xstream.dropUntil">module xstream.dropUntil</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.dropUntil.DropUntilOperator" id="apidoc.element.xstream.dropUntil.DropUntilOperator">
+        function <span class="apidocSignatureSpan">xstream.dropUntil.</span>DropUntilOperator
+        <span class="apidocSignatureSpan">(o, // o = other ins)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function DropUntilOperator(o, // o = other ins) {
+    this.o = o;
+    this.ins = ins;
+    this.type = &#x27;dropUntil&#x27;;
+    this.out = null;
+    this.oil = index_1.NO_IL; // oil = other InternalListener
+    this.on = false;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.dropUntil.default" id="apidoc.element.xstream.dropUntil.default">
+        function <span class="apidocSignatureSpan">xstream.dropUntil.</span>default
+        <span class="apidocSignatureSpan">(other)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function dropUntil(other) {
+    return function dropUntilOperator(ins) {
+        return new index_1.Stream(new DropUntilOperator(other, ins));
+    };
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+ */
+function tween(_a) {
+    var from = _a.from, to = _a.to, duration = _a.duration, _b = _a.ease, ease = _b === void 0 ? tweenFactory.linear.ease : _b,
+_c = _a.interval, interval = _c === void 0 ? DEFAULT_INTERVAL : _c;
+    var totalTicks = Math.round(duration / interval);
+    return index_1.Stream.periodic(interval)
+        .take(totalTicks)
+        .map(function (tick) { return ease(tick / totalTicks, from, to); })
+        .compose(function (s) { return concat_1.<span class="apidocCodeKeywordSpan">default</span>(s, index_1.Stream.of(to)); });
+}
+var tweenFactory = tween;
+tweenFactory.linear = { ease: interpolate };
+tweenFactory.power2 = easingPower2;
+tweenFactory.power3 = easingPower3;
+tweenFactory.power4 = easingPower4;
+tweenFactory.exponential = easingExponential;
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.xstream.flattenConcurrently" id="apidoc.module.xstream.flattenConcurrently">module xstream.flattenConcurrently</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.flattenConcurrently.FlattenConcOperator" id="apidoc.element.xstream.flattenConcurrently.FlattenConcOperator">
+        function <span class="apidocSignatureSpan">xstream.flattenConcurrently.</span>FlattenConcOperator
+        <span class="apidocSignatureSpan">(ins)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function FlattenConcOperator(ins) {
+    this.ins = ins;
+    this.type = &#x27;flattenConcurrently&#x27;;
+    this.active = 1; // number of outers and inners that have not yet ended
+    this.out = null;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.flattenConcurrently.default" id="apidoc.element.xstream.flattenConcurrently.default">
+        function <span class="apidocSignatureSpan">xstream.flattenConcurrently.</span>default
+        <span class="apidocSignatureSpan">(ins)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function flattenConcurrently(ins) {
+    return new index_1.Stream(new FlattenConcOperator(ins));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+ */
+function tween(_a) {
+    var from = _a.from, to = _a.to, duration = _a.duration, _b = _a.ease, ease = _b === void 0 ? tweenFactory.linear.ease : _b,
+_c = _a.interval, interval = _c === void 0 ? DEFAULT_INTERVAL : _c;
+    var totalTicks = Math.round(duration / interval);
+    return index_1.Stream.periodic(interval)
+        .take(totalTicks)
+        .map(function (tick) { return ease(tick / totalTicks, from, to); })
+        .compose(function (s) { return concat_1.<span class="apidocCodeKeywordSpan">default</span>(s, index_1.Stream.of(to)); });
+}
+var tweenFactory = tween;
+tweenFactory.linear = { ease: interpolate };
+tweenFactory.power2 = easingPower2;
+tweenFactory.power3 = easingPower3;
+tweenFactory.power4 = easingPower4;
+tweenFactory.exponential = easingExponential;
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.xstream.flattenSequentially" id="apidoc.module.xstream.flattenSequentially">module xstream.flattenSequentially</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.flattenSequentially.FlattenSeqOperator" id="apidoc.element.xstream.flattenSequentially.FlattenSeqOperator">
+        function <span class="apidocSignatureSpan">xstream.flattenSequentially.</span>FlattenSeqOperator
+        <span class="apidocSignatureSpan">(ins)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function FlattenSeqOperator(ins) {
+    this.type = &#x27;flattenSequentially&#x27;;
+    this.ins = ins;
+    this.out = null;
+    this.open = true;
+    this.active = null;
+    this.activeIL = null;
+    this.seq = [];
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.flattenSequentially.default" id="apidoc.element.xstream.flattenSequentially.default">
+        function <span class="apidocSignatureSpan">xstream.flattenSequentially.</span>default
+        <span class="apidocSignatureSpan">(ins)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function flattenSequentially(ins) {
+    return new index_1.Stream(new FlattenSeqOperator(ins));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+ */
+function tween(_a) {
+    var from = _a.from, to = _a.to, duration = _a.duration, _b = _a.ease, ease = _b === void 0 ? tweenFactory.linear.ease : _b,
+_c = _a.interval, interval = _c === void 0 ? DEFAULT_INTERVAL : _c;
+    var totalTicks = Math.round(duration / interval);
+    return index_1.Stream.periodic(interval)
+        .take(totalTicks)
+        .map(function (tick) { return ease(tick / totalTicks, from, to); })
+        .compose(function (s) { return concat_1.<span class="apidocCodeKeywordSpan">default</span>(s, index_1.Stream.of(to)); });
+}
+var tweenFactory = tween;
+tweenFactory.linear = { ease: interpolate };
+tweenFactory.power2 = easingPower2;
+tweenFactory.power3 = easingPower3;
+tweenFactory.power4 = easingPower4;
+tweenFactory.exponential = easingExponential;
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.xstream.fromDiagram" id="apidoc.module.xstream.fromDiagram">module xstream.fromDiagram</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.fromDiagram.DiagramProducer" id="apidoc.element.xstream.fromDiagram.DiagramProducer">
+        function <span class="apidocSignatureSpan">xstream.fromDiagram.</span>DiagramProducer
+        <span class="apidocSignatureSpan">(diagram, opt)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function DiagramProducer(diagram, opt) {
+    this.diagram = diagram.trim();
+    this.errorVal = (opt &#x26;&#x26; opt.errorValue) ? opt.errorValue : &#x27;#&#x27;;
+    this.timeUnit = (opt &#x26;&#x26; opt.timeUnit) ? opt.timeUnit : 20;
+    this.values = (opt &#x26;&#x26; opt.values) ? opt.values : {};
+    this.tasks = [];
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.fromDiagram.default" id="apidoc.element.xstream.fromDiagram.default">
+        function <span class="apidocSignatureSpan">xstream.fromDiagram.</span>default
+        <span class="apidocSignatureSpan">(diagram, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function fromDiagram(diagram, options) {
+    return new index_1.Stream(new DiagramProducer(diagram, options));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+ */
+function tween(_a) {
+    var from = _a.from, to = _a.to, duration = _a.duration, _b = _a.ease, ease = _b === void 0 ? tweenFactory.linear.ease : _b,
+_c = _a.interval, interval = _c === void 0 ? DEFAULT_INTERVAL : _c;
+    var totalTicks = Math.round(duration / interval);
+    return index_1.Stream.periodic(interval)
+        .take(totalTicks)
+        .map(function (tick) { return ease(tick / totalTicks, from, to); })
+        .compose(function (s) { return concat_1.<span class="apidocCodeKeywordSpan">default</span>(s, index_1.Stream.of(to)); });
+}
+var tweenFactory = tween;
+tweenFactory.linear = { ease: interpolate };
+tweenFactory.power2 = easingPower2;
+tweenFactory.power3 = easingPower3;
+tweenFactory.power4 = easingPower4;
+tweenFactory.exponential = easingExponential;
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.xstream.fromEvent" id="apidoc.module.xstream.fromEvent">module xstream.fromEvent</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.fromEvent.DOMEventProducer" id="apidoc.element.xstream.fromEvent.DOMEventProducer">
+        function <span class="apidocSignatureSpan">xstream.fromEvent.</span>DOMEventProducer
+        <span class="apidocSignatureSpan">(node, eventType, useCapture)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function DOMEventProducer(node, eventType, useCapture) {
+    this.node = node;
+    this.eventType = eventType;
+    this.useCapture = useCapture;
+    this.type = &#x27;fromEvent&#x27;;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.fromEvent.NodeEventProducer" id="apidoc.element.xstream.fromEvent.NodeEventProducer">
+        function <span class="apidocSignatureSpan">xstream.fromEvent.</span>NodeEventProducer
+        <span class="apidocSignatureSpan">(node, eventName)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function NodeEventProducer(node, eventName) {
+    this.node = node;
+    this.eventName = eventName;
+    this.type = &#x27;fromEvent&#x27;;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.fromEvent.default" id="apidoc.element.xstream.fromEvent.default">
+        function <span class="apidocSignatureSpan">xstream.fromEvent.</span>default
+        <span class="apidocSignatureSpan">(element, eventName, useCapture)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function fromEvent(element, eventName, useCapture) {
+    if (useCapture === void 0) { useCapture = false; }
+    if (isEmitter(element)) {
+        return new index_1.Stream(new NodeEventProducer(element, eventName));
+    }
+    else {
+        return new index_1.Stream(new DOMEventProducer(element, eventName, useCapture));
+    }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+ */
+function tween(_a) {
+    var from = _a.from, to = _a.to, duration = _a.duration, _b = _a.ease, ease = _b === void 0 ? tweenFactory.linear.ease : _b,
+_c = _a.interval, interval = _c === void 0 ? DEFAULT_INTERVAL : _c;
+    var totalTicks = Math.round(duration / interval);
+    return index_1.Stream.periodic(interval)
+        .take(totalTicks)
+        .map(function (tick) { return ease(tick / totalTicks, from, to); })
+        .compose(function (s) { return concat_1.<span class="apidocCodeKeywordSpan">default</span>(s, index_1.Stream.of(to)); });
+}
+var tweenFactory = tween;
+tweenFactory.linear = { ease: interpolate };
+tweenFactory.power2 = easingPower2;
+tweenFactory.power3 = easingPower3;
+tweenFactory.power4 = easingPower4;
+tweenFactory.exponential = easingExponential;
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.xstream.pairwise" id="apidoc.module.xstream.pairwise">module xstream.pairwise</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.pairwise.default" id="apidoc.element.xstream.pairwise.default">
+        function <span class="apidocSignatureSpan">xstream.pairwise.</span>default
+        <span class="apidocSignatureSpan">(ins)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function pairwise(ins) {
+    return new index_1.Stream(new PairwiseOperator(ins));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+ */
+function tween(_a) {
+    var from = _a.from, to = _a.to, duration = _a.duration, _b = _a.ease, ease = _b === void 0 ? tweenFactory.linear.ease : _b,
+_c = _a.interval, interval = _c === void 0 ? DEFAULT_INTERVAL : _c;
+    var totalTicks = Math.round(duration / interval);
+    return index_1.Stream.periodic(interval)
+        .take(totalTicks)
+        .map(function (tick) { return ease(tick / totalTicks, from, to); })
+        .compose(function (s) { return concat_1.<span class="apidocCodeKeywordSpan">default</span>(s, index_1.Stream.of(to)); });
+}
+var tweenFactory = tween;
+tweenFactory.linear = { ease: interpolate };
+tweenFactory.power2 = easingPower2;
+tweenFactory.power3 = easingPower3;
+tweenFactory.power4 = easingPower4;
+tweenFactory.exponential = easingExponential;
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.xstream.sampleCombine" id="apidoc.module.xstream.sampleCombine">module xstream.sampleCombine</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.sampleCombine.SampleCombineListener" id="apidoc.element.xstream.sampleCombine.SampleCombineListener">
+        function <span class="apidocSignatureSpan">xstream.sampleCombine.</span>SampleCombineListener
+        <span class="apidocSignatureSpan">(i, p)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function SampleCombineListener(i, p) {
+    this.i = i;
+    this.p = p;
+    p.ils[i] = this;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.sampleCombine.SampleCombineOperator" id="apidoc.element.xstream.sampleCombine.SampleCombineOperator">
+        function <span class="apidocSignatureSpan">xstream.sampleCombine.</span>SampleCombineOperator
+        <span class="apidocSignatureSpan">(ins, streams)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function SampleCombineOperator(ins, streams) {
+    this.type = &#x27;sampleCombine&#x27;;
+    this.ins = ins;
+    this.others = streams;
+    this.out = NO;
+    this.ils = [];
+    this.Nn = 0;
+    this.vals = [];
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.sampleCombine.default" id="apidoc.element.xstream.sampleCombine.default">
+        function <span class="apidocSignatureSpan">xstream.sampleCombine.</span>default
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function sampleCombine() {
+    var streams = [];
+    for (var _i = 0; _i &#x3c; arguments.length; _i++) {
+        streams[_i] = arguments[_i];
+    }
+    return function sampleCombineOperator(sampler) {
+        return new index_1.Stream(new SampleCombineOperator(sampler, streams));
+    };
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+ */
+function tween(_a) {
+    var from = _a.from, to = _a.to, duration = _a.duration, _b = _a.ease, ease = _b === void 0 ? tweenFactory.linear.ease : _b,
+_c = _a.interval, interval = _c === void 0 ? DEFAULT_INTERVAL : _c;
+    var totalTicks = Math.round(duration / interval);
+    return index_1.Stream.periodic(interval)
+        .take(totalTicks)
+        .map(function (tick) { return ease(tick / totalTicks, from, to); })
+        .compose(function (s) { return concat_1.<span class="apidocCodeKeywordSpan">default</span>(s, index_1.Stream.of(to)); });
+}
+var tweenFactory = tween;
+tweenFactory.linear = { ease: interpolate };
+tweenFactory.power2 = easingPower2;
+tweenFactory.power3 = easingPower3;
+tweenFactory.power4 = easingPower4;
+tweenFactory.exponential = easingExponential;
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.xstream.split" id="apidoc.module.xstream.split">module xstream.split</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.split.SplitOperator" id="apidoc.element.xstream.split.SplitOperator">
+        function <span class="apidocSignatureSpan">xstream.split.</span>SplitOperator
+        <span class="apidocSignatureSpan">(s, // s = separator ins)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function SplitOperator(s, // s = separator ins) {
+    this.s = s;
+    this.ins = ins;
+    this.type = &#x27;split&#x27;;
+    this.curr = new index_1.Stream();
+    this.out = null;
+    this.sil = index_1.NO_IL; // sil = separator InternalListener
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.split.default" id="apidoc.element.xstream.split.default">
+        function <span class="apidocSignatureSpan">xstream.split.</span>default
+        <span class="apidocSignatureSpan">(separator)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function split(separator) {
+    return function splitOperator(ins) {
+        return new index_1.Stream(new SplitOperator(separator, ins));
+    };
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+ */
+function tween(_a) {
+    var from = _a.from, to = _a.to, duration = _a.duration, _b = _a.ease, ease = _b === void 0 ? tweenFactory.linear.ease : _b,
+_c = _a.interval, interval = _c === void 0 ? DEFAULT_INTERVAL : _c;
+    var totalTicks = Math.round(duration / interval);
+    return index_1.Stream.periodic(interval)
+        .take(totalTicks)
+        .map(function (tick) { return ease(tick / totalTicks, from, to); })
+        .compose(function (s) { return concat_1.<span class="apidocCodeKeywordSpan">default</span>(s, index_1.Stream.of(to)); });
+}
+var tweenFactory = tween;
+tweenFactory.linear = { ease: interpolate };
+tweenFactory.power2 = easingPower2;
+tweenFactory.power3 = easingPower3;
+tweenFactory.power4 = easingPower4;
+tweenFactory.exponential = easingExponential;
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.xstream.throttle" id="apidoc.module.xstream.throttle">module xstream.throttle</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.throttle.default" id="apidoc.element.xstream.throttle.default">
+        function <span class="apidocSignatureSpan">xstream.throttle.</span>default
+        <span class="apidocSignatureSpan">(period)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function throttle(period) {
+    return function throttleOperator(ins) {
+        return new index_1.Stream(new ThrottleOperator(period, ins));
+    };
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+ */
+function tween(_a) {
+    var from = _a.from, to = _a.to, duration = _a.duration, _b = _a.ease, ease = _b === void 0 ? tweenFactory.linear.ease : _b,
+_c = _a.interval, interval = _c === void 0 ? DEFAULT_INTERVAL : _c;
+    var totalTicks = Math.round(duration / interval);
+    return index_1.Stream.periodic(interval)
+        .take(totalTicks)
+        .map(function (tick) { return ease(tick / totalTicks, from, to); })
+        .compose(function (s) { return concat_1.<span class="apidocCodeKeywordSpan">default</span>(s, index_1.Stream.of(to)); });
+}
+var tweenFactory = tween;
+tweenFactory.linear = { ease: interpolate };
+tweenFactory.power2 = easingPower2;
+tweenFactory.power3 = easingPower3;
+tweenFactory.power4 = easingPower4;
+tweenFactory.exponential = easingExponential;
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.xstream.tween" id="apidoc.module.xstream.tween">module xstream.tween</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.xstream.tween.default" id="apidoc.element.xstream.tween.default">
+        function <span class="apidocSignatureSpan">xstream.tween.</span>default
+        <span class="apidocSignatureSpan">(_a)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function tween(_a) {
+    var from = _a.from, to = _a.to, duration = _a.duration, _b = _a.ease, ease = _b === void 0 ? tweenFactory.linear.ease : _b,
+_c = _a.interval, interval = _c === void 0 ? DEFAULT_INTERVAL : _c;
+    var totalTicks = Math.round(duration / interval);
+    return index_1.Stream.periodic(interval)
+        .take(totalTicks)
+        .map(function (tick) { return ease(tick / totalTicks, from, to); })
+        .compose(function (s) { return concat_1.default(s, index_1.Stream.of(to)); });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+ */
+function tween(_a) {
+    var from = _a.from, to = _a.to, duration = _a.duration, _b = _a.ease, ease = _b === void 0 ? tweenFactory.linear.ease : _b,
+_c = _a.interval, interval = _c === void 0 ? DEFAULT_INTERVAL : _c;
+    var totalTicks = Math.round(duration / interval);
+    return index_1.Stream.periodic(interval)
+        .take(totalTicks)
+        .map(function (tick) { return ease(tick / totalTicks, from, to); })
+        .compose(function (s) { return concat_1.<span class="apidocCodeKeywordSpan">default</span>(s, index_1.Stream.of(to)); });
+}
+var tweenFactory = tween;
+tweenFactory.linear = { ease: interpolate };
+tweenFactory.power2 = easingPower2;
+tweenFactory.power3 = easingPower3;
+tweenFactory.power4 = easingPower4;
+tweenFactory.exponential = easingExponential;
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
