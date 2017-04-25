@@ -1,6 +1,6 @@
 # npmdoc-xstream
 
-#### api documentation for  [xstream (v10.5.0)](https://github.com/staltz/xstream#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-xstream.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-xstream) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-xstream.svg)](https://travis-ci.org/npmdoc/node-npmdoc-xstream)
+#### basic api documentation for  [xstream (v10.5.0)](https://github.com/staltz/xstream#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-xstream.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-xstream) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-xstream.svg)](https://travis-ci.org/npmdoc/node-npmdoc-xstream)
 
 #### An extremely intuitive, small, and fast functional reactive stream library for JavaScript
 
@@ -21,54 +21,22 @@
 ```json
 
 {
-    "name": "xstream",
-    "version": "10.5.0",
-    "description": "An extremely intuitive, small, and fast functional reactive stream library for JavaScript",
-    "main": "index.js",
-    "typings": "index.d.ts",
-    "scripts": {
-        "commit": "git-cz",
-        "changelog": "conventional-changelog --infile CHANGELOG.md --same-file --release-count 0 --preset angular",
-        "lint": "tslint -c tslint.json src/**/*.ts src/extra/*.ts",
-        "premocha": "npm run compile",
-        "mocha": "mocha tests/*.ts tests/**/*.ts --require ts-node/register",
-        "test": "npm run lint && npm run mocha && npm run doctest",
-        "doctest": "markdown-doctest",
-        "setup-browser-tests": "browserify browser-tests/index.ts -p [ tsify ] > browser-tests/tests-bundle.js",
-        "teardown-browser-tests": "rm browser-tests/tests-bundle.js",
-        "compile": "tsc",
-        "page-content": "npm run compile && rm -rf .ignore/ && mkdirp .ignore/ && npm run changelog && node tools/make-toc.js && node tools/make-factories.js && node tools/make-methods.js && cat markdown/header.md markdown/generated-toc.md markdown/overview.md markdown/generated-factories.md markdown/generated-methods.md markdown/footer.md > .ignore/content.md",
-        "extra-docs": "node tools/make-extras.js && rm EXTRA_DOCS.md && cp markdown/generated-extras.md EXTRA_DOCS.md",
-        "readme": "npm run page-content && cat markdown/readme-title.md .ignore/content.md > README.md",
-        "postreadme": "npm run extra-docs",
-        "predist": "rm -rf dist/ && mkdirp dist/ && npm run compile",
-        "dist": "browserify index.js --standalone xstream | node tools/strip-comments.js > dist/xstream.js",
-        "postdist": "node tools/minify.js",
-        "start": "npm install && npm prune",
-        "check-release": "node tools/check-release.js",
-        "prepublish": "npm run compile",
-        "preversion": "npm run readme && npm test",
-        "version": "npm run readme && npm run dist && git add -A",
-        "postversion": "git push origin master && git push origin --tags && npm publish && npm run update-gh-pages",
-        "update-gh-pages": "git checkout gh-pages && rm _includes/content.md && cp .ignore/content.md _includes/ && git add --all && if git diff --cached --quiet > /dev/null; then :; else git commit -m \"update site\"; fi && git push origin gh-pages && git checkout master",
-        "release": "./tools/release-if-necessary.sh",
-        "release-patch": "false",
-        "release-minor": "npm version minor -m \"chore(package): release new version\"",
-        "release-major": "npm version major -m \"chore(package): release new version\""
+    "author": {
+        "name": "Andre Staltz",
+        "url": "http://andre.staltz.com/"
     },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/staltz/xstream.git"
-    },
-    "author": "Andre Staltz <andre+npm@staltz.com> (http://andre.staltz.com/)",
-    "license": "MIT",
     "bugs": {
         "url": "https://github.com/staltz/xstream/issues"
     },
-    "homepage": "https://github.com/staltz/xstream#readme",
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/cz-conventional-changelog"
+        }
+    },
     "dependencies": {
         "symbol-observable": "^1.0.2"
     },
+    "description": "An extremely intuitive, small, and fast functional reactive stream library for JavaScript",
     "devDependencies": {
         "@types/mocha": "^2.2.40",
         "@types/node": "^7.0.12",
@@ -94,14 +62,65 @@
         "typescript": "2.1.5",
         "validate-commit-msg": "2.4.x"
     },
+    "directories": {},
+    "dist": {
+        "shasum": "acf7776cf86f0188e09ebaf3227d847818d1564a",
+        "tarball": "https://registry.npmjs.org/xstream/-/xstream-10.5.0.tgz"
+    },
+    "gitHead": "1512654b6216c39db0fb9a69a8b7732eb4a8b1ef",
+    "homepage": "https://github.com/staltz/xstream#readme",
+    "license": "MIT",
+    "main": "index.js",
+    "maintainers": [
+        {
+            "name": "cycle"
+        },
+        {
+            "name": "staltz"
+        }
+    ],
+    "name": "xstream",
+    "optionalDependencies": {},
     "publishConfig": {
         "access": "public"
     },
-    "config": {
-        "commitizen": {
-            "path": "./node_modules/cz-conventional-changelog"
-        }
-    }
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/staltz/xstream.git"
+    },
+    "scripts": {
+        "changelog": "conventional-changelog --infile CHANGELOG.md --same-file --release-count 0 --preset angular",
+        "check-release": "node tools/check-release.js",
+        "commit": "git-cz",
+        "compile": "tsc",
+        "dist": "browserify index.js --standalone xstream | node tools/strip-comments.js > dist/xstream.js",
+        "doctest": "markdown-doctest",
+        "extra-docs": "node tools/make-extras.js && rm EXTRA_DOCS.md && cp markdown/generated-extras.md EXTRA_DOCS.md",
+        "lint": "tslint -c tslint.json src/**/*.ts src/extra/*.ts",
+        "mocha": "mocha tests/*.ts tests/**/*.ts --require ts-node/register",
+        "page-content": "npm run compile && rm -rf .ignore/ && mkdirp .ignore/ && npm run changelog && node tools/make-toc.js && node tools/make-factories.js && node tools/make-methods.js && cat markdown/header.md markdown/generated-toc.md markdown/overview.md markdown/generated-factories.md markdown/generated-methods.md markdown/footer.md > .ignore/content.md",
+        "postdist": "node tools/minify.js",
+        "postreadme": "npm run extra-docs",
+        "postversion": "git push origin master && git push origin --tags && npm publish && npm run update-gh-pages",
+        "predist": "rm -rf dist/ && mkdirp dist/ && npm run compile",
+        "premocha": "npm run compile",
+        "prepublish": "npm run compile",
+        "preversion": "npm run readme && npm test",
+        "readme": "npm run page-content && cat markdown/readme-title.md .ignore/content.md > README.md",
+        "release": "./tools/release-if-necessary.sh",
+        "release-major": "npm version major -m \"chore(package): release new version\"",
+        "release-minor": "npm version minor -m \"chore(package): release new version\"",
+        "release-patch": "false",
+        "setup-browser-tests": "browserify browser-tests/index.ts -p [ tsify ] > browser-tests/tests-bundle.js",
+        "start": "npm install && npm prune",
+        "teardown-browser-tests": "rm browser-tests/tests-bundle.js",
+        "test": "npm run lint && npm run mocha && npm run doctest",
+        "update-gh-pages": "git checkout gh-pages && rm _includes/content.md && cp .ignore/content.md _includes/ && git add --all && if git diff --cached --quiet > /dev/null; then :; else git commit -m \"update site\"; fi && git push origin gh-pages && git checkout master",
+        "version": "npm run readme && npm run dist && git add -A"
+    },
+    "typings": "index.d.ts",
+    "version": "10.5.0",
+    "bin": {}
 }
 ```
 
