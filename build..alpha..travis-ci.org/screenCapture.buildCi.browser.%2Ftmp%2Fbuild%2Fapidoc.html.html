@@ -1335,21 +1335,22 @@ tweenFactory.exponential = easingExponential;
     return new Stream(new Combine(streams));
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
+### Features
 
-```js
-import pairwise from 'xstream/extra/pairwise'
+* **core:** improve signature of operators regarding types ([#43](https://github.com/staltz/xstream/issues/43)) ([116e9f2](https
+://github.com/staltz/xstream/commit/116e9f2))
 
-const stream1 = xs.of(1);
-const stream2 = xs.of(2);
 
-xs.<span class="apidocCodeKeywordSpan">combine</span>(stream1, stream2).map(
-  combinedEmissions =&gt; ([ ...combinedEmissions ])
-).compose(pairwise)
-```
+### BREAKING CHANGES
 
-#### Arguments:
-
-- `stream1: Stream` A stream to combine together with other streams.
+* **core:** Instance operators stream.<span class="apidocCodeKeywordSpan">combine</span>() and stream.merge() removed. Use
+xs.combine() and xs.merge() instead.
+* **core:** debug() now returns a MemoryStream if the input was also a MemoryStream.
+endWhen() now returns a MemoryStream if the input was also a MemoryStream.
+fold() now returns always a MemoryStream, not Stream.
+imitate() only works on conventional Stream, will throw error on
+MemoryStream.
+map() now returns a MemoryStream if the input was also a MemoryStream.
 ...</pre></li>
     </ul>
 
@@ -1372,26 +1373,21 @@ xs.<span class="apidocCodeKeywordSpan">combine</span>(stream1, stream2).map(
     return new Stream(producer);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
+### BREAKING CHANGES
 
-## Producer
+* **combine:** combine() now takes only streams as argument, no more project function. combine() will return an
+stream that emits arrays of the collected values from each input stream. To transform that array,
+you should now use map() operator after combine(), to take the array of collected values and return
+a combination value. See tests for examples.
+* **imitate:** MimicStream and xs.createMimic() were removed entirely. The imitate() method now exists on every
+Stream instance. To use the proxy stream technique, use xs.<span class="apidocCodeKeywordSpan">create</span>() to create the proxy
+, then call
+proxy.imitate(other).
 
-A Producer is like a machine that produces events to be broadcast on a Stream.
 
-Events from a Stream must come from somewhere, right? That's why we need Producers. They are objects with two functions attached
-: `start(listener)` and `stop()`. Once you call `start` with a `listener`, the Producer will start generating events and it will
- send those to the listener. When you call `stop()`, the Producer should quit doing its own thing.
 
-Streams are also Listeners (actually they are "InternalListeners", not Listeners, but that's a detail you can ignore
-), so you can theoretically give a Stream as the listener in `producer.start(streamAsListener)`. Then, essentially the Producer
-is now generating events that will be broadcast on the Stream. Nice, huh? Now a bunch of listeners can be attached to the Stream
- and they can all get those events originally coming from the Producer. That's why `xs.<span class="apidocCodeKeywordSpan">
-create</span>(producer)` receives a Producer to be the heart of a new Stream. Check this out:
-
-```js
-var producer = {
-start: function (listener) {
-  this.id = setInterval(() =&gt; listener.next('yo'), 1000)
-},
+&lt;a name="4.0.4"&gt;&lt;/a&gt;
+## [4.0.4](https://github.com/staltz/xstream/compare/v4.0.3...v4.0.4) (2016-06-09)
 ...</pre></li>
     </ul>
 
@@ -1409,7 +1405,24 @@ start: function (listener) {
         internalizeProducer(producer); // mutates the input
     return new MemoryStream(producer);
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+/// &lt;reference types="mocha"/&gt;
+/// &lt;reference types="node"/&gt;
+import xs, {Listener} from '../src/index';
+import * as assert from 'assert';
+
+describe('MemoryStream', () =&gt; {
+  it('should allow use like a subject, from xs.<span class="apidocCodeKeywordSpan">createWithMemory</span>()', (done:
+any) =&gt; {
+const stream = xs.createWithMemory();
+
+stream.shamefullySendNext(1);
+
+stream.addListener({
+  next(x: any) {
+    assert.strictEqual(x, 1);
+...</pre></li>
     </ul>
 
 
@@ -1594,21 +1607,22 @@ Stream.from = function (input) {
     return new Stream(new Merge(streams));
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-};
+### Features
 
-suite
-.add('xstream', function (deferred) {
-  var source = xs.fromArray(a);
-  var inc = source.filter(isPositive).mapTo(+1);
-  var dec = source.filter(isNegative).mapTo(-1);
-  var count = xs.<span class="apidocCodeKeywordSpan">merge</span>(inc, dec).fold(addXY, 0);
-  var label = xs.of('initial', 'Count is ');
-  var view = xs.combine(label, count).map(renderWithArray);
-  runners.runXStream(deferred, view);
-}, options)
-.add('most', function (deferred) {
-  var source = most.from(a);
-  var inc = source.filter(isPositive).map(returnPlus1);
+* **core:** improve signature of operators regarding types ([#43](https://github.com/staltz/xstream/issues/43)) ([116e9f2](https
+://github.com/staltz/xstream/commit/116e9f2))
+
+
+### BREAKING CHANGES
+
+* **core:** Instance operators stream.combine() and stream.<span class="apidocCodeKeywordSpan">merge</span>() removed. Use
+xs.combine() and xs.merge() instead.
+* **core:** debug() now returns a MemoryStream if the input was also a MemoryStream.
+endWhen() now returns a MemoryStream if the input was also a MemoryStream.
+fold() now returns always a MemoryStream, not Stream.
+imitate() only works on conventional Stream, will throw error on
+MemoryStream.
+map() now returns a MemoryStream if the input was also a MemoryStream.
 ...</pre></li>
     </ul>
 
@@ -1625,21 +1639,21 @@ suite
     return new Stream({ _start: noop, _stop: noop });
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-    return require('./extra/' + extra).default;
-  }
-},
+Example:
 
-globals: {
-  xs: xstream,
-  stream: xstream.empty(),
-  A: xstream.<span class="apidocCodeKeywordSpan">never</span>(),
-  B: xstream.never(),
-  setInterval: noop,
-  console: {
-    log: noop,
-    error: noop
-  },
-  document: new FakeEventTarget(),
+```js
+import split from 'xstream/extra/split'
+import concat from 'xstream/extra/concat'
+
+const source = xs.periodic(50).take(10)
+const separator = concat(xs.periodic(167).take(2), xs.<span class="apidocCodeKeywordSpan">never</span>())
+const result = source.compose(split(separator))
+
+result.addListener({
+next: stream =&gt; {
+  stream.addListener({
+    next: i =&gt; console.log(i),
+    error: err =&gt; console.error(err),
 ...</pre></li>
     </ul>
 
@@ -1660,20 +1674,22 @@ globals: {
     return Stream.fromArray(items);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-Note: to minimize garbage collection, *combine* uses the same array
-instance for each emission.  If you need to compare emissions over time,
-cache the values with `map` first:
+* **startWith:** implement startWith operator ([3489ce3](https://github.com/staltz/xstream/commit/3489ce3))
+* **Stream:** add a concept of current value ([cc5650f](https://github.com/staltz/xstream/commit/cc5650f))
+* **Stream:** add debounce to Stream prototype ([f44b819](https://github.com/staltz/xstream/commit/f44b819))
+* **Stream:** add mapTo to Stream prototype ([58c83f9](https://github.com/staltz/xstream/commit/58c83f9))
+* **Stream:** add never() and empty() stream factories ([04f59b0](https://github.com/staltz/xstream/commit/04f59b0))
+* **Stream:** implement really simply Stream and interval() factory ([a3a08e7](https://github.com/staltz/xstream/commit/a3a08e7))
+* **Stream:** implement Stream ([86d68ff](https://github.com/staltz/xstream/commit/86d68ff))
+* **Stream:** implement xs.<span class="apidocCodeKeywordSpan">of</span>() ([f86fd49](https://github.com/staltz/xstream/commit/f86fd49
+))
+* **takeUntil:** implement and test takeUntil() ([304bed1](https://github.com/staltz/xstream/commit/304bed1))
+* **throw:** implement new static factory throw() ([76879a5](https://github.com/staltz/xstream/commit/76879a5))
 
-```js
-import pairwise from 'xstream/extra/pairwise'
 
-const stream1 = xs.<span class="apidocCodeKeywordSpan">of</span>(1);
-const stream2 = xs.of(2);
+### Performance Improvements
 
-xs.combine(stream1, stream2).map(
-  combinedEmissions =&gt; ([ ...combinedEmissions ])
-).compose(pairwise)
-```
+* **core:** have FilterMapOperator extend MapOperator ([e0c153a](https://github.com/staltz/xstream/commit/e0c153a))
 ...</pre></li>
     </ul>
 
@@ -1690,20 +1706,21 @@ xs.combine(stream1, stream2).map(
     return new Stream(new Periodic(period));
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
+```
+
+Example:
+
 ```js
-import xs from 'xstream'
+import dropUntil from 'xstream/extra/dropUntil'
 
-// Tick every second incremental numbers,
-// only pass even numbers, then map them to their square,
-// and stop after 5 seconds has passed
+const other = xs.<span class="apidocCodeKeywordSpan">periodic</span>(220).take(1)
 
-var stream = xs.<span class="apidocCodeKeywordSpan">periodic</span>(1000)
-  .filter(i =&gt; i % 2 === 0)
-  .map(i =&gt; i * i)
-  .endWhen(xs.periodic(5000).take(1))
+const stream = xs.periodic(50)
+.take(6)
+.compose(dropUntil(other))
 
-// So far, the stream is idle.
-// As soon as it gets its first listener, it starts executing.
+stream.addListener({
+next: i =&gt; console.log(i),
 ...</pre></li>
     </ul>
 
@@ -1909,7 +1926,21 @@ Stream.prototype._e = function (err) {
     <li>description and source-code<pre class="apidocCodePre">debug = function (labelOrSpy) {
     return _super.prototype.debug.call(this, labelOrSpy);
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+    return this;
+  }
+
+  debug(): MemoryStream&lt;T&gt;;
+  debug(labelOrSpy: string): MemoryStream&lt;T&gt;;
+  debug(labelOrSpy: (t: T) =&gt; any): MemoryStream&lt;T&gt;;
+  debug(labelOrSpy?: string | ((t: T) =&gt; any) | undefined): MemoryStream&lt;T&gt; {
+    return super.<span class="apidocCodeKeywordSpan">debug</span>(labelOrSpy as any) as MemoryStream&lt;T&gt;;
+  }
+}
+
+export {NO, NO_IL};
+export default Stream;
+...</pre></li>
     </ul>
 
 
@@ -1956,21 +1987,21 @@ error: err =&gt; console.error(err),
     return this._map(project);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-
-// Tick every second incremental numbers,
-// only pass even numbers, then map them to their square,
-// and stop after 5 seconds has passed
-
-var stream = xs.periodic(1000)
-.filter(i =&gt; i % 2 === 0)
-.<span class="apidocCodeKeywordSpan">map</span>(i =&gt; i * i)
-.endWhen(xs.periodic(5000).take(1))
-
-// So far, the stream is idle.
-// As soon as it gets its first listener, it starts executing.
-
-stream.addListener({
-next: i =&gt; console.log(i),
+*
+* ```js
+* import pairwise from 'xstream/extra/pairwise'
+*
+* const stream1 = xs.of(1);
+* const stream2 = xs.of(2);
+*
+* xs.combine(stream1, stream2).<span class="apidocCodeKeywordSpan">map</span>(
+*   combinedEmissions =&gt; ([ ...combinedEmissions ])
+* ).compose(pairwise)
+* ```
+*
+* @factory true
+* @param {Stream} stream1 A stream to combine together with other streams.
+* @param {Stream} stream2 A stream to combine together with other streams.
 ...</pre></li>
     </ul>
 
@@ -1987,21 +2018,21 @@ next: i =&gt; console.log(i),
     return _super.prototype.mapTo.call(this, projectedValue);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-*
-* Examples:
-*
-* ```js
-* import fromEvent from 'xstream/extra/fromEvent'
-*
-* const stream = fromEvent(document.querySelector('.button'), 'click')
-*   .<span class="apidocCodeKeywordSpan">mapTo</span>('Button clicked!')
-*
-* stream.addListener({
-*   next: i =&gt; console.log(i),
-*   error: err =&gt; console.error(err),
-*   complete: () =&gt; console.log('completed')
-* })
-* ```
+
+Examples:
+
+```js
+import fromEvent from 'xstream/extra/fromEvent'
+
+const stream = fromEvent(document.querySelector('.button'), 'click')
+  .<span class="apidocCodeKeywordSpan">mapTo</span>('Button clicked!')
+
+stream.addListener({
+  next: i =&gt; console.log(i),
+  error: err =&gt; console.error(err),
+  complete: () =&gt; console.log('completed')
+})
+```
 ...</pre></li>
     </ul>
 
@@ -2032,7 +2063,23 @@ next: i =&gt; console.log(i),
     <li>description and source-code<pre class="apidocCodePre">replaceError = function (replace) {
     return _super.prototype.replaceError.call(this, replace);
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+}
+
+endWhen(other: Stream&lt;any&gt;): MemoryStream&lt;T&gt; {
+  return super.endWhen(other) as MemoryStream&lt;T&gt;;
+}
+
+replaceError(replace: (err: any) =&gt; Stream&lt;T&gt;): MemoryStream&lt;T&gt; {
+  return super.<span class="apidocCodeKeywordSpan">replaceError</span>(replace) as MemoryStream&lt;T&gt;;
+}
+
+remember(): MemoryStream&lt;T&gt; {
+  return this;
+}
+
+debug(): MemoryStream&lt;T&gt;;
+...</pre></li>
     </ul>
 
 
@@ -2048,21 +2095,21 @@ next: i =&gt; console.log(i),
     return _super.prototype.take.call(this, amount);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-// Tick every second incremental numbers,
-// only pass even numbers, then map them to their square,
-// and stop after 5 seconds has passed
+```
 
-var stream = xs.periodic(1000)
-.filter(i =&gt; i % 2 === 0)
-.map(i =&gt; i * i)
-.endWhen(xs.periodic(5000).<span class="apidocCodeKeywordSpan">take</span>(1))
+Example:
 
-// So far, the stream is idle.
-// As soon as it gets its first listener, it starts executing.
+```js
+import dropUntil from 'xstream/extra/dropUntil'
+
+const other = xs.periodic(220).<span class="apidocCodeKeywordSpan">take</span>(1)
+
+const stream = xs.periodic(50)
+.take(6)
+.compose(dropUntil(other))
 
 stream.addListener({
 next: i =&gt; console.log(i),
-error: err =&gt; console.error(err),
 ...</pre></li>
     </ul>
 
@@ -2214,21 +2261,22 @@ exports.default = concat;
     return new Stream(new Combine(streams));
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
+### Features
 
-```js
-import pairwise from 'xstream/extra/pairwise'
+* **core:** improve signature of operators regarding types ([#43](https://github.com/staltz/xstream/issues/43)) ([116e9f2](https
+://github.com/staltz/xstream/commit/116e9f2))
 
-const stream1 = xs.of(1);
-const stream2 = xs.of(2);
 
-xs.<span class="apidocCodeKeywordSpan">combine</span>(stream1, stream2).map(
-  combinedEmissions =&gt; ([ ...combinedEmissions ])
-).compose(pairwise)
-```
+### BREAKING CHANGES
 
-#### Arguments:
-
-- `stream1: Stream` A stream to combine together with other streams.
+* **core:** Instance operators stream.<span class="apidocCodeKeywordSpan">combine</span>() and stream.merge() removed. Use
+xs.combine() and xs.merge() instead.
+* **core:** debug() now returns a MemoryStream if the input was also a MemoryStream.
+endWhen() now returns a MemoryStream if the input was also a MemoryStream.
+fold() now returns always a MemoryStream, not Stream.
+imitate() only works on conventional Stream, will throw error on
+MemoryStream.
+map() now returns a MemoryStream if the input was also a MemoryStream.
 ...</pre></li>
     </ul>
 
@@ -2251,26 +2299,21 @@ xs.<span class="apidocCodeKeywordSpan">combine</span>(stream1, stream2).map(
     return new Stream(producer);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
+### BREAKING CHANGES
 
-## Producer
+* **combine:** combine() now takes only streams as argument, no more project function. combine() will return an
+stream that emits arrays of the collected values from each input stream. To transform that array,
+you should now use map() operator after combine(), to take the array of collected values and return
+a combination value. See tests for examples.
+* **imitate:** MimicStream and xs.createMimic() were removed entirely. The imitate() method now exists on every
+Stream instance. To use the proxy stream technique, use xs.<span class="apidocCodeKeywordSpan">create</span>() to create the proxy
+, then call
+proxy.imitate(other).
 
-A Producer is like a machine that produces events to be broadcast on a Stream.
 
-Events from a Stream must come from somewhere, right? That's why we need Producers. They are objects with two functions attached
-: `start(listener)` and `stop()`. Once you call `start` with a `listener`, the Producer will start generating events and it will
- send those to the listener. When you call `stop()`, the Producer should quit doing its own thing.
 
-Streams are also Listeners (actually they are "InternalListeners", not Listeners, but that's a detail you can ignore
-), so you can theoretically give a Stream as the listener in `producer.start(streamAsListener)`. Then, essentially the Producer
-is now generating events that will be broadcast on the Stream. Nice, huh? Now a bunch of listeners can be attached to the Stream
- and they can all get those events originally coming from the Producer. That's why `xs.<span class="apidocCodeKeywordSpan">
-create</span>(producer)` receives a Producer to be the heart of a new Stream. Check this out:
-
-```js
-var producer = {
-start: function (listener) {
-  this.id = setInterval(() =&gt; listener.next('yo'), 1000)
-},
+&lt;a name="4.0.4"&gt;&lt;/a&gt;
+## [4.0.4](https://github.com/staltz/xstream/compare/v4.0.3...v4.0.4) (2016-06-09)
 ...</pre></li>
     </ul>
 
@@ -2288,7 +2331,24 @@ start: function (listener) {
         internalizeProducer(producer); // mutates the input
     return new MemoryStream(producer);
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+/// &lt;reference types="mocha"/&gt;
+/// &lt;reference types="node"/&gt;
+import xs, {Listener} from '../src/index';
+import * as assert from 'assert';
+
+describe('MemoryStream', () =&gt; {
+  it('should allow use like a subject, from xs.<span class="apidocCodeKeywordSpan">createWithMemory</span>()', (done:
+any) =&gt; {
+const stream = xs.createWithMemory();
+
+stream.shamefullySendNext(1);
+
+stream.addListener({
+  next(x: any) {
+    assert.strictEqual(x, 1);
+...</pre></li>
     </ul>
 
 
@@ -2473,21 +2533,22 @@ Stream.from = function (input) {
     return new Stream(new Merge(streams));
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-};
+### Features
 
-suite
-.add('xstream', function (deferred) {
-  var source = xs.fromArray(a);
-  var inc = source.filter(isPositive).mapTo(+1);
-  var dec = source.filter(isNegative).mapTo(-1);
-  var count = xs.<span class="apidocCodeKeywordSpan">merge</span>(inc, dec).fold(addXY, 0);
-  var label = xs.of('initial', 'Count is ');
-  var view = xs.combine(label, count).map(renderWithArray);
-  runners.runXStream(deferred, view);
-}, options)
-.add('most', function (deferred) {
-  var source = most.from(a);
-  var inc = source.filter(isPositive).map(returnPlus1);
+* **core:** improve signature of operators regarding types ([#43](https://github.com/staltz/xstream/issues/43)) ([116e9f2](https
+://github.com/staltz/xstream/commit/116e9f2))
+
+
+### BREAKING CHANGES
+
+* **core:** Instance operators stream.combine() and stream.<span class="apidocCodeKeywordSpan">merge</span>() removed. Use
+xs.combine() and xs.merge() instead.
+* **core:** debug() now returns a MemoryStream if the input was also a MemoryStream.
+endWhen() now returns a MemoryStream if the input was also a MemoryStream.
+fold() now returns always a MemoryStream, not Stream.
+imitate() only works on conventional Stream, will throw error on
+MemoryStream.
+map() now returns a MemoryStream if the input was also a MemoryStream.
 ...</pre></li>
     </ul>
 
@@ -2504,21 +2565,21 @@ suite
     return new Stream({ _start: noop, _stop: noop });
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-    return require('./extra/' + extra).default;
-  }
-},
+Example:
 
-globals: {
-  xs: xstream,
-  stream: xstream.empty(),
-  A: xstream.<span class="apidocCodeKeywordSpan">never</span>(),
-  B: xstream.never(),
-  setInterval: noop,
-  console: {
-    log: noop,
-    error: noop
-  },
-  document: new FakeEventTarget(),
+```js
+import split from 'xstream/extra/split'
+import concat from 'xstream/extra/concat'
+
+const source = xs.periodic(50).take(10)
+const separator = concat(xs.periodic(167).take(2), xs.<span class="apidocCodeKeywordSpan">never</span>())
+const result = source.compose(split(separator))
+
+result.addListener({
+next: stream =&gt; {
+  stream.addListener({
+    next: i =&gt; console.log(i),
+    error: err =&gt; console.error(err),
 ...</pre></li>
     </ul>
 
@@ -2539,20 +2600,22 @@ globals: {
     return Stream.fromArray(items);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-Note: to minimize garbage collection, *combine* uses the same array
-instance for each emission.  If you need to compare emissions over time,
-cache the values with `map` first:
+* **startWith:** implement startWith operator ([3489ce3](https://github.com/staltz/xstream/commit/3489ce3))
+* **Stream:** add a concept of current value ([cc5650f](https://github.com/staltz/xstream/commit/cc5650f))
+* **Stream:** add debounce to Stream prototype ([f44b819](https://github.com/staltz/xstream/commit/f44b819))
+* **Stream:** add mapTo to Stream prototype ([58c83f9](https://github.com/staltz/xstream/commit/58c83f9))
+* **Stream:** add never() and empty() stream factories ([04f59b0](https://github.com/staltz/xstream/commit/04f59b0))
+* **Stream:** implement really simply Stream and interval() factory ([a3a08e7](https://github.com/staltz/xstream/commit/a3a08e7))
+* **Stream:** implement Stream ([86d68ff](https://github.com/staltz/xstream/commit/86d68ff))
+* **Stream:** implement xs.<span class="apidocCodeKeywordSpan">of</span>() ([f86fd49](https://github.com/staltz/xstream/commit/f86fd49
+))
+* **takeUntil:** implement and test takeUntil() ([304bed1](https://github.com/staltz/xstream/commit/304bed1))
+* **throw:** implement new static factory throw() ([76879a5](https://github.com/staltz/xstream/commit/76879a5))
 
-```js
-import pairwise from 'xstream/extra/pairwise'
 
-const stream1 = xs.<span class="apidocCodeKeywordSpan">of</span>(1);
-const stream2 = xs.of(2);
+### Performance Improvements
 
-xs.combine(stream1, stream2).map(
-  combinedEmissions =&gt; ([ ...combinedEmissions ])
-).compose(pairwise)
-```
+* **core:** have FilterMapOperator extend MapOperator ([e0c153a](https://github.com/staltz/xstream/commit/e0c153a))
 ...</pre></li>
     </ul>
 
@@ -2569,20 +2632,21 @@ xs.combine(stream1, stream2).map(
     return new Stream(new Periodic(period));
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
+```
+
+Example:
+
 ```js
-import xs from 'xstream'
+import dropUntil from 'xstream/extra/dropUntil'
 
-// Tick every second incremental numbers,
-// only pass even numbers, then map them to their square,
-// and stop after 5 seconds has passed
+const other = xs.<span class="apidocCodeKeywordSpan">periodic</span>(220).take(1)
 
-var stream = xs.<span class="apidocCodeKeywordSpan">periodic</span>(1000)
-  .filter(i =&gt; i % 2 === 0)
-  .map(i =&gt; i * i)
-  .endWhen(xs.periodic(5000).take(1))
+const stream = xs.periodic(50)
+.take(6)
+.compose(dropUntil(other))
 
-// So far, the stream is idle.
-// As soon as it gets its first listener, it starts executing.
+stream.addListener({
+next: i =&gt; console.log(i),
 ...</pre></li>
     </ul>
 
@@ -3031,21 +3095,21 @@ Stream.prototype._e = function (err) {
     this._add(listener);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-  .filter(i =&gt; i % 2 === 0)
-  .map(i =&gt; i * i)
-  .endWhen(xs.periodic(5000).take(1))
 
-// So far, the stream is idle.
-// As soon as it gets its first listener, it starts executing.
+const streamA = xs.of('a', 'b', 'c')
+const streamB = xs.of(10, 20, 30)
+const streamC = xs.of('X', 'Y', 'Z')
 
-stream.<span class="apidocCodeKeywordSpan">addListener</span>({
-  next: i =&gt; console.log(i),
-  error: err =&gt; console.error(err),
-  complete: () =&gt; console.log('completed'),
+const outputStream = concat(streamA, streamB, streamC)
+
+outputStream.<span class="apidocCodeKeywordSpan">addListener</span>({
+  next: (x) =&gt; console.log(x),
+  error: (err) =&gt; console.error(err),
+  complete: () =&gt; console.log('concat completed'),
 })
 ```
 
-# Installation
+#### Arguments:
 ...</pre></li>
     </ul>
 
@@ -3062,20 +3126,18 @@ stream.<span class="apidocCodeKeywordSpan">addListener</span>({
     return operator(this);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-import pairwise from 'xstream/extra/pairwise'
 
-const stream1 = xs.of(1);
-const stream2 = xs.of(2);
+### BREAKING CHANGES
 
-xs.combine(stream1, stream2).map(
-  combinedEmissions =&gt; ([ ...combinedEmissions ])
-).<span class="apidocCodeKeywordSpan">compose</span>(pairwise)
-```
-
-#### Arguments:
-
-- `stream1: Stream` A stream to combine together with other streams.
-- `stream2: Stream` A stream to combine together with other streams. Multiple streams, not just two, may be given as arguments.
+* **extra:** Usage of flattenSequentially have changed, from
+compose(flattenSequentially()) to compose(flattenSequentially) and from
+compose(pairwise()) and compose(pairwise).
+* **extra:** flattenConcurrently must be separately imported as an extra operator and
+used with .<span class="apidocCodeKeywordSpan">compose</span>()
+* **imitate:** imitate() method on Stream removed. New type introduced: MimicStream,
+which can be created through xs.createMimic(). A MimicStream has the
+method imitate(), which has the same API as before, but imitate does not
+trigger any Stream/Producer to start.
 ...</pre></li>
     </ul>
 
@@ -3122,7 +3184,21 @@ Stream.prototype._map = function (project) {
     <li>description and source-code<pre class="apidocCodePre">debug = function (labelOrSpy) {
     return new (this.ctor())(new Debug(this, labelOrSpy));
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+    return this;
+  }
+
+  debug(): MemoryStream&lt;T&gt;;
+  debug(labelOrSpy: string): MemoryStream&lt;T&gt;;
+  debug(labelOrSpy: (t: T) =&gt; any): MemoryStream&lt;T&gt;;
+  debug(labelOrSpy?: string | ((t: T) =&gt; any) | undefined): MemoryStream&lt;T&gt; {
+    return super.<span class="apidocCodeKeywordSpan">debug</span>(labelOrSpy as any) as MemoryStream&lt;T&gt;;
+  }
+}
+
+export {NO, NO_IL};
+export default Stream;
+...</pre></li>
     </ul>
 
 
@@ -3219,21 +3295,21 @@ stream.addListener({
     return new Stream(new Flatten(this));
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-applications. A parent component contains some child components. A child
-has an action stream which is given to the parent to define its state:
-
-&lt;!-- skip-example --&gt;
-```js
-const childActionProxy$ = xs.create();
-const parent = Parent({...sources, childAction$: childActionProxy$});
-const childAction$ = parent.state$.map(s =&gt; s.child.action$).<span class="apidocCodeKeywordSpan">flatten</span>();
-childActionProxy$.imitate(childAction$);
-```
-
-Note, though, that **`imitate()` does not support MemoryStreams**. If we
-would attempt to imitate a MemoryStream in a circular dependency, we would
-either get a race condition (where the symptom would be "nothing happens")
-or an infinite cyclic emission of values. It's useful to think about
+* applications. A parent component contains some child components. A child
+* has an action stream which is given to the parent to define its state:
+*
+* &lt;!-- skip-example --&gt;
+* ```js
+* const childActionProxy$ = xs.create();
+* const parent = Parent({...sources, childAction$: childActionProxy$});
+* const childAction$ = parent.state$.map(s =&gt; s.child.action$).<span class="apidocCodeKeywordSpan">flatten</span>();
+* childActionProxy$.imitate(childAction$);
+* ```
+*
+* Note, though, that **`imitate()` does not support MemoryStreams**. If we
+* would attempt to imitate a MemoryStream in a circular dependency, we would
+* either get a race condition (where the symptom would be "nothing happens")
+* or an infinite cyclic emission of values. It's useful to think about
 ...</pre></li>
     </ul>
 
@@ -3289,20 +3365,18 @@ suite
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
-```js
-import delay from 'xstream/extra/delay'
+* **combine:** combine() now takes only streams as argument, no more project function. combine() will return an
+stream that emits arrays of the collected values from each input stream. To transform that array,
+you should now use map() operator after combine(), to take the array of collected values and return
+a combination value. See tests for examples.
+* **imitate:** MimicStream and xs.createMimic() were removed entirely. The imitate() method now exists on every
+Stream instance. To use the proxy stream technique, use xs.create() to create the proxy, then call
+proxy.<span class="apidocCodeKeywordSpan">imitate</span>(other).
 
-var secondProxy$ = xs.create();
-var first$ = secondProxy$.map(x =&gt; x * 10).take(3);
-var second$ = first$.map(x =&gt; x + 1).startWith(1).compose(delay(100));
-secondProxy$.<span class="apidocCodeKeywordSpan">imitate</span>(second$);
-```
 
-We create `secondProxy$` before the others, so it can be used in the
-declaration of `first$`. Then, after both `first$` and `second$` are
-defined, we hook `secondProxy$` with `second$` with `imitate()` to tell
-that they are "the same". `imitate` will not trigger the start of any
-stream, it just binds `secondProxy$` and `second$` together.
+
+&lt;a name="4.0.4"&gt;&lt;/a&gt;
+## [4.0.4](https://github.com/staltz/xstream/compare/v4.0.3...v4.0.4) (2016-06-09)
 ...</pre></li>
     </ul>
 
@@ -3351,21 +3425,21 @@ suite
     return this._map(project);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-
-// Tick every second incremental numbers,
-// only pass even numbers, then map them to their square,
-// and stop after 5 seconds has passed
-
-var stream = xs.periodic(1000)
-.filter(i =&gt; i % 2 === 0)
-.<span class="apidocCodeKeywordSpan">map</span>(i =&gt; i * i)
-.endWhen(xs.periodic(5000).take(1))
-
-// So far, the stream is idle.
-// As soon as it gets its first listener, it starts executing.
-
-stream.addListener({
-next: i =&gt; console.log(i),
+*
+* ```js
+* import pairwise from 'xstream/extra/pairwise'
+*
+* const stream1 = xs.of(1);
+* const stream2 = xs.of(2);
+*
+* xs.combine(stream1, stream2).<span class="apidocCodeKeywordSpan">map</span>(
+*   combinedEmissions =&gt; ([ ...combinedEmissions ])
+* ).compose(pairwise)
+* ```
+*
+* @factory true
+* @param {Stream} stream1 A stream to combine together with other streams.
+* @param {Stream} stream2 A stream to combine together with other streams.
 ...</pre></li>
     </ul>
 
@@ -3385,21 +3459,21 @@ next: i =&gt; console.log(i),
     return s;
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-*
-* Examples:
-*
-* ```js
-* import fromEvent from 'xstream/extra/fromEvent'
-*
-* const stream = fromEvent(document.querySelector('.button'), 'click')
-*   .<span class="apidocCodeKeywordSpan">mapTo</span>('Button clicked!')
-*
-* stream.addListener({
-*   next: i =&gt; console.log(i),
-*   error: err =&gt; console.error(err),
-*   complete: () =&gt; console.log('completed')
-* })
-* ```
+
+Examples:
+
+```js
+import fromEvent from 'xstream/extra/fromEvent'
+
+const stream = fromEvent(document.querySelector('.button'), 'click')
+  .<span class="apidocCodeKeywordSpan">mapTo</span>('Button clicked!')
+
+stream.addListener({
+  next: i =&gt; console.log(i),
+  error: err =&gt; console.error(err),
+  complete: () =&gt; console.log('completed')
+})
+```
 ...</pre></li>
     </ul>
 
@@ -3431,23 +3505,21 @@ next: i =&gt; console.log(i),
     this._remove(listener);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-stream.addListener(listener)
-```
-
-And when you think the Listener is done, you can remove it from the Stream:
-
-&lt;!-- skip-example --&gt;
-```js
-stream.<span class="apidocCodeKeywordSpan">removeListener</span>(listener)
-```
-
-## Producer
-
-A Producer is like a machine that produces events to be broadcast on a Stream.
-
-Events from a Stream must come from somewhere, right? That's why we need Producers. They are objects with two functions attached
-: `start(listener)` and `stop()`. Once you call `start` with a `listener`, the Producer will start generating events and it will
- send those to the listener. When you call `stop()`, the Producer should quit doing its own thing.
+}
+var StreamSub = (function () {
+function StreamSub(_stream, _listener) {
+    this._stream = _stream;
+    this._listener = _listener;
+}
+StreamSub.prototype.unsubscribe = function () {
+    this._stream.<span class="apidocCodeKeywordSpan">removeListener</span>(this._listener);
+};
+return StreamSub;
+}());
+var Observer = (function () {
+function Observer(_listener) {
+    this._listener = _listener;
+}
 ...</pre></li>
     </ul>
 
@@ -3463,7 +3535,23 @@ Events from a Stream must come from somewhere, right? That's why we need Produce
     <li>description and source-code<pre class="apidocCodePre">replaceError = function (replace) {
     return new (this.ctor())(new ReplaceError(replace, this));
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+}
+
+endWhen(other: Stream&lt;any&gt;): MemoryStream&lt;T&gt; {
+  return super.endWhen(other) as MemoryStream&lt;T&gt;;
+}
+
+replaceError(replace: (err: any) =&gt; Stream&lt;T&gt;): MemoryStream&lt;T&gt; {
+  return super.<span class="apidocCodeKeywordSpan">replaceError</span>(replace) as MemoryStream&lt;T&gt;;
+}
+
+remember(): MemoryStream&lt;T&gt; {
+  return this;
+}
+
+debug(): MemoryStream&lt;T&gt;;
+...</pre></li>
     </ul>
 
 
@@ -3488,7 +3576,23 @@ Events from a Stream must come from somewhere, right? That's why we need Produce
         this._dl = listener;
     }
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  const stream = xs.of(1, 2, 3);
+  const listener: Listener&lt;number&gt; = {
+    next: () =&gt; done('should not be called'),
+    error: () =&gt; done('should not be called'),
+    complete: () =&gt; done('should not be called'),
+  };
+
+  stream.<span class="apidocCodeKeywordSpan">setDebugListener</span>(listener);
+  setTimeout(() =&gt; done(), 200);
+});
+
+it('should spy an existing stream execution', (done: any) =&gt; {
+  const stream = xs.periodic(200).take(8);
+  const listener = { next: () =&gt; { }, error: () =&gt; { }, complete: () =&gt; { } };
+  const expected = [0, 1, 2];
+...</pre></li>
     </ul>
 
 
@@ -3503,7 +3607,23 @@ Events from a Stream must come from somewhere, right? That's why we need Produce
     <li>description and source-code<pre class="apidocCodePre">shamefullySendComplete = function () {
     this._c();
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  next(x: any) {
+    assert.strictEqual(x, 1);
+  },
+  error: (err: any) =&gt; done(err),
+  complete: done,
+});
+
+stream.<span class="apidocCodeKeywordSpan">shamefullySendComplete</span>();
+  });
+
+  it('should be createable giving a custom producer object', (done: any) =&gt; {
+const expected = [10, 20, 30];
+let producerStopped: boolean = false;
+
+const stream = xs.createWithMemory({
+...</pre></li>
     </ul>
 
 
@@ -3533,7 +3653,23 @@ Events from a Stream must come from somewhere, right? That's why we need Produce
     <li>description and source-code<pre class="apidocCodePre">shamefullySendNext = function (value) {
     this._n(value);
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+import xs, {Listener} from '../src/index';
+import * as assert from 'assert';
+
+describe('MemoryStream', () =&gt; {
+  it('should allow use like a subject, from xs.createWithMemory()', (done: any) =&gt; {
+const stream = xs.createWithMemory();
+
+stream.<span class="apidocCodeKeywordSpan">shamefullySendNext</span>(1);
+
+stream.addListener({
+  next(x: any) {
+    assert.strictEqual(x, 1);
+  },
+  error: (err: any) =&gt; done(err),
+  complete: done,
+...</pre></li>
     </ul>
 
 
@@ -3549,21 +3685,21 @@ Events from a Stream must come from somewhere, right? That's why we need Produce
     return new MemoryStream(new StartWith(this, initial));
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-which in turn depends on `first$`:
-
-&lt;!-- skip-example --&gt;
-```js
-import delay from 'xstream/extra/delay'
-
-var first$ = second$.map(x =&gt; x * 10).take(3);
-var second$ = first$.map(x =&gt; x + 1).<span class="apidocCodeKeywordSpan">startWith</span>(1).compose(delay(100));
-```
-
-However, that is invalid JavaScript, because `second$` is undefined
-on the first line. This is how *imitate* can help solve it:
-
-```js
-import delay from 'xstream/extra/delay'
+* which in turn depends on `first$`:
+*
+* &lt;!-- skip-example --&gt;
+* ```js
+* import delay from 'xstream/extra/delay'
+*
+* var first$ = second$.map(x =&gt; x * 10).take(3);
+* var second$ = first$.map(x =&gt; x + 1).<span class="apidocCodeKeywordSpan">startWith</span>(1).compose(delay(100));
+* ```
+*
+* However, that is invalid JavaScript, because `second$` is undefined
+* on the first line. This is how *imitate* can help solve it:
+*
+* ```js
+* import delay from 'xstream/extra/delay'
 ...</pre></li>
     </ul>
 
@@ -3612,21 +3748,21 @@ FromObservable.prototype._stop = function () {
     return new (this.ctor())(new Take(amount, this));
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-// Tick every second incremental numbers,
-// only pass even numbers, then map them to their square,
-// and stop after 5 seconds has passed
+```
 
-var stream = xs.periodic(1000)
-.filter(i =&gt; i % 2 === 0)
-.map(i =&gt; i * i)
-.endWhen(xs.periodic(5000).<span class="apidocCodeKeywordSpan">take</span>(1))
+Example:
 
-// So far, the stream is idle.
-// As soon as it gets its first listener, it starts executing.
+```js
+import dropUntil from 'xstream/extra/dropUntil'
+
+const other = xs.periodic(220).<span class="apidocCodeKeywordSpan">take</span>(1)
+
+const stream = xs.periodic(50)
+.take(6)
+.compose(dropUntil(other))
 
 stream.addListener({
 next: i =&gt; console.log(i),
-error: err =&gt; console.error(err),
 ...</pre></li>
     </ul>
 
